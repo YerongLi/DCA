@@ -723,9 +723,6 @@ class EDRanker:
             dev_f1 = 0.
             test_f1 = 0.
             ave_f1 = 0.
-            if rl_acc_threshold < 0.92:
-                rl_acc_threshold += 0.02
-            temp_rlt = []
             #self.records[e] = dict()
             for di, (dname, data) in enumerate(dev_datasets):
                 if dname == 'aida-B':
