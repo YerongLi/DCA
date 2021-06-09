@@ -14,5 +14,8 @@ print(ent_inlinks_dict[262048])
 ent_desc = json.load(open('../data/ent2desc.json', 'r'))
 print(ent_desc['German_language'])
 
+voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
+
+
 entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entity',
                                                           voca_emb_dir + 'entity_embeddings.npy')
