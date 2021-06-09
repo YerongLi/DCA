@@ -799,7 +799,7 @@ class EDRanker:
                     self.model.save(self.args.model_path)
 
             if not_better_count == self.args.n_not_inc:
-                break
+                return
 
             self.model.print_weight_norm()
 
