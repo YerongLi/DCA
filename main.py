@@ -8,7 +8,7 @@ from pprint import pprint
 import torch
 import pickle
 from DCA.ed_ranker import EDRanker
-import csv
+import csv`
 import time
 
 import numpy as np
