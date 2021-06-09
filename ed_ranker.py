@@ -710,6 +710,7 @@ class EDRanker:
     # Heuristic Order Learning Method - Based on Mention-Local Similarity or Mention-Topical Similarity
     def train(self, org_train_dataset, org_dev_datasets, config):
         print('extracting training data')
+        print(self.args.model_path, 'self.args.model_path')
         train_dataset = self.get_data_items(org_train_dataset, predict=False, isTrain=True)
         print('#train docs', len(train_dataset))
         self.init_lr = config['lr']
@@ -727,7 +728,7 @@ class EDRanker:
 
         best_f1 = -1
         not_better_count = 0
-        is_counting = False
+        is_counting = True 
         eval_after_n_epochs = self.args.eval_after_n_epochs
 
         order_learning = False

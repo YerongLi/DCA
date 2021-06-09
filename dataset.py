@@ -22,7 +22,8 @@ def read_csv_file(path):
     if path.find('aida')>=0:
         flag = 1
     else:
-        types = json.load(open('../data/generated/type/'+path.split('/')[-1].split('.')[0]+'.json', 'rb'))
+        print('../data/generated/type/'+path.split('/')[-1].split('.')[0]+'.json',)
+        types = json.load(open('../data/generated/type/'+path.split('/')[-1].split('.')[0]+'.json', 'r', encoding='utf-8'))
 
     docid = '0'
     with open(path, 'r', encoding='utf8') as f:
