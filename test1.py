@@ -20,4 +20,4 @@ voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
 entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entity',
                                                           voca_emb_dir + 'entity_embeddings.npy')
 														  
-print(entity_voca.word2id.keys())
+print( + entity_voca.word2id['en.wikipedia.org/wiki/German_language'])
