@@ -718,7 +718,8 @@ class EDRanker:
         for dname, data in org_dev_datasets:
             dev_datasets.append((dname, self.get_data_items(data, predict=True, isTrain=False)))
             print(dname, '#dev docs', len(dev_datasets[-1][1]))
-        print(train_dataset)
+        print('train_dataset', train_dataset[:100])
+        order_learning = True
         if evalTrue:
             dev_f1 = 0.
             test_f1 = 0.
@@ -729,7 +730,7 @@ class EDRanker:
                     self.rt_flag = True
                 else:
                     self.rt_flag = False
-                predictions = self.predict(data, config['isDynamic'], order_learning)
+                # predictions = self.predict(data, config['isDynamic'], order_learning)
                 #self.records[e][dname] = self.record
                 f1 = D.eval(org_dev_datasets[di][1], predictions)
 
@@ -746,21 +747,21 @@ class EDRanker:
                     eval_f1_csv_writer.writerow([dname, e, 0, f1])
                     #eval_f1_csv_writer.writerow([dname, e, 1, f1_1])
                     #eval_f1_csv_writer.writerow([dname, e, 2, f1_2])
-                temp_rlt.append([dname, f1])
+                # temp_rlt.append([dname, f1])
                 if dname == 'aida-A':
                     dev_f1 = f1
                 if dname == 'aida-B':
                     test_f1 = f1
                 ave_f1 += f1
-            if dev_f1>best_aida_A_f1:
-                best_aida_A_f1 = dev_f1
-                best_aida_A_rlts = copy.deepcopy(temp_rlt)
-            if test_f1>best_aida_B_f1:
-                best_aida_B_f1 = test_f1
-                best_aida_B_rlts = copy.deepcopy(temp_rlt)
-            if ave_f1 > best_ave_f1:
-                best_ave_f1 = ave_f1
-                best_ave_rlts = copy.deepcopy(temp_rlt)
+            # if dev_f1>best_aida_A_f1:
+            #     best_aida_A_f1 = dev_f1
+            #     best_aida_A_rlts = copy.deepcopy(temp_rlt)
+            # if test_f1>best_aida_B_f1:
+            #     best_aida_B_f1 = test_f1
+            #     best_aida_B_rlts = copy.deepcopy(temp_rlt)
+            # if ave_f1 > best_ave_f1:
+            #     best_ave_f1 = ave_f1
+            #     best_ave_rlts = copy.deepcopy(temp_rlt)
 
             if not config['isDynamic']:
                 self.record_runtime('DCA')
