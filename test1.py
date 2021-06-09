@@ -11,4 +11,4 @@ with open(ent_inlinks_path, 'rb') as f_pkl:
 print(ent_inlinks_dict[262048])
 
 ent_desc = json.load(open('../data/ent2desc.json', 'r'))
-print(ent_desc.keys())
+print(ent_desc['German'])
