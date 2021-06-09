@@ -718,7 +718,7 @@ class EDRanker:
         for dname, data in org_dev_datasets:
             dev_datasets.append((dname, self.get_data_items(data, predict=True, isTrain=False)))
             print(dname, '#dev docs', len(dev_datasets[-1][1]))
-
+        print(train_dataset)
         if evalTrue:
             dev_f1 = 0.
             test_f1 = 0.
