@@ -12,6 +12,6 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		if not l[6:-2] ==  dicmention[docid][mention][0]:
 			print(l[6:-2])
 			print(dicmention[docid][mention][0])
-			raise AssertionError
+			# raise AssertionError
 			break
 	print(dicmention['1 EU)']['German'])
