@@ -1,7 +1,7 @@
 import tqdm
 with open('../data/generated/test_train_data/aida_train.csv') as f:
 	dicmention = dict()
-	for line in tqdm.tqdm((f):
+	for line in tqdm.tqdm(f):
 		l = line.split('\t')
 		docid = l[1]
 		mention = l[2]
