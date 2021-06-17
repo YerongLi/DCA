@@ -1,5 +1,4 @@
 import tqdm
-num_lines = sum(1 for line in open('myfile.txt'))
 with open('../data/generated/test_train_data/aida_train.csv') as f:
 	dicmention = dict()
 	for line in tqdm.tqdm(f):
