@@ -9,7 +9,7 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 			dicmention[docid] = dict()
 		if mention not in dicmention[docid]:
 			dicmention[docid][mention] = (l[6:-2], l[-1][:-1])
-		assert(l[6:-2] == dicmention[docid][mention][0])
+		assert(not l[6:-2] == dicmention[docid][mention][0])
 		# if not l[6:-2] ==  dicmention[docid][mention][0]:
 		# 	# print(l[6:-2])
 		# 	# print(dicmention[docid][mention][0])
