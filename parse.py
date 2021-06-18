@@ -20,10 +20,10 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		(candidates, groundtruth) = dicmention[docid][mention]
 		candidates = [c[c.index(',', c.index(',') + 1) + 1:].replace(' ', '_') for c in candidates]
 		assert(l[6:-2] == dicmention[docid][mention][0])
-
-		if not all(['en.wikipedia.org/wiki/' + c in entity_voca.word2id for c in candidates]):
-			count+= 1
-			print(candidates, count)
+		for c in candidates:
+			if 'en.wikipedia.org/wiki/' + c in entity_voca.word2id:
+				count+= 1
+				print('en.wikipedia.org/wiki/' + c, count)
 		# if not l[6:-2] ==  dicmention[docid][mention][0]:
 		# 	# print(l[6:-2])
 		# 	# print(dicmention[docid][mention][0])
