@@ -23,7 +23,7 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		for c in candidates:
 			if 'en.wikipedia.org/wiki/' + c in entity_voca.word2id:
 				count+= 1
-				print('en.wikipedia.org/wiki/' + c, count)
+				print('https://en.wikipedia.org/wiki/' + c, count)
 		# if not l[6:-2] ==  dicmention[docid][mention][0]:
 		# 	# print(l[6:-2])
 		# 	# print(dicmention[docid][mention][0])
