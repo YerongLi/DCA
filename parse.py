@@ -19,7 +19,7 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		(candidates, groundtruth) = dicmention[docid][mention]
 		candidates = [c[c.index(',', c.index(',') + 1) + 1:].replace(' ', '_') for c in candidates]
 		assert(l[6:-2] == dicmention[docid][mention][0])
-		if not all([c in entity_voca.word2id for c in candidates]):
+		if not all(['en.wikipedia.org/wiki/' + c in entity_voca.word2id for c in candidates]):
 			print(candidates)
 		# if not l[6:-2] ==  dicmention[docid][mention][0]:
 		# 	# print(l[6:-2])
