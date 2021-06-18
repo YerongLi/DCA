@@ -19,3 +19,4 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		# 	break
 	(candidates, groundtruth) =dicmention['44 SOCCER)']['Sion']
 	candidates = [c[c.index(',', c.index(',') + 1) + 1:] for c in candidates]
+	print(candidates)
