@@ -1,5 +1,6 @@
 import tqdm
 import json
+import utils
 ent_desc = json.load(open('../data/ent2desc.json', 'r'))
 voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
 
