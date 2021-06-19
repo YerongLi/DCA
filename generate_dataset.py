@@ -33,10 +33,11 @@ def generate_csv(dataset):
 	(pos, dataset) = dataset
 	(name, dictionary) = dataset
 	def process(doc):
-		(groundtruth, _, _) = dictionary[doc['gold']]
-		print(groundtruth)
+		for entry in dictionary[doc]:
+			(groundtruth, _, _) = entry['gold']
+			print(groundtruth)
 	for doc in tqdm.tqdm(dictionary, position = pos):
-		
+		process(doc)
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
