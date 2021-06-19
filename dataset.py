@@ -4,6 +4,7 @@ from collections import OrderedDict
 from pprint import pprint
 import pickle as pkl
 import json
+
 doc2type = pkl.load(open('../data/doc2type.pkl', 'rb'))
 entity2type = pkl.load(open('../data/entity2type.pkl', 'rb'))
 mtype2id = {'PER':0, 'ORG':1, 'GPE':2, 'UNK':3}
@@ -16,7 +17,7 @@ def judge(s1, s2):
         return True
     return False
 def read_csv_file(path):
-    data = {}
+    data = OrderedDict()
     flag = 0
 
     if path.find('aida')>=0:
