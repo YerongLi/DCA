@@ -1,9 +1,20 @@
-import tqdm
+import sys
+sys.path.insert(0, "../")
 import json
-import utils
-ent_desc = json.load(open('../data/ent2desc.json', 'r'))
-voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
+import DCA.dataset as D
+import argparse
+import DCA.utils as utils
+from pprint import pprint
+import torch
+import pickle
+from DCA.ed_ranker import EDRanker
+import csv
+import time
+import tqdm
 
+doc2type = pkl.load(open('../data/doc2type.pkl', 'rb'))
+entity2type = pkl.load(open('../data/entity2type.pkl', 'rb'))
+mtype2id = {'PER':0, 'ORG':1, 'GPE':2, 'UNK':3}
 entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entity',
                                                           voca_emb_dir + 'entity_embeddings.npy')
 with open('../data/generated/test_train_data/aida_train.csv') as f:

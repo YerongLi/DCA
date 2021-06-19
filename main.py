@@ -165,7 +165,6 @@ F1_CSV_Path = args.output_path + args.method + "_" + args.order + "_" + str(args
 if __name__ == "__main__":
     print('load conll at', datadir)
     conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
-    print(type(conll.train))
     print(conll.train['528 SQUASH) 528 SQUASH)'][0].keys())
     print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
     print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
