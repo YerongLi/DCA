@@ -54,7 +54,8 @@ def generate_csv(dataset):
 				
 	for doc in tqdm.tqdm(list(dictionary.keys())[:100], position = pos):
 		process(doc)
-	print(tmp)
+	print(tmp[0])
+	print(tmp[-1])
 	
 
 with multiprocessing.Pool(3) as pool: 
