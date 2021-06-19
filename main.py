@@ -165,7 +165,8 @@ F1_CSV_Path = args.output_path + args.method + "_" + args.order + "_" + str(args
 if __name__ == "__main__":
     print('load conll at', datadir)
     conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
-
+    print(type(conll.train))
+    sys.exit()
     print('create model')
     word_voca, word_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.word',
                                                       voca_emb_dir + 'word_embeddings.npy')
