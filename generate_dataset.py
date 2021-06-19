@@ -31,15 +31,28 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	(pos, dataset) = dataset
-	(name, dictionary) = dataset
+	(_, dictionary) = dataset
+	tmp = []
 	def process(doc):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
-			print(groundtruth)
-			print(entry['mention'])
-			print(entry['candidates'])
-			sys.exit()
-	for doc in tqdm.tqdm(dictionary, position = pos):
+			mention = entry['mention']
+			for candidate in entry['candidates']:
+				c = candidate[0]
+				cname = c.replace('_', ' ')
+				if 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
+					continue
+				tmp.append([f'{doc}==={entry["context"]}',
+					f'{mention};{cname}',
+					str([0.0] * 20),
+					1 if c == groundtruth else 0,
+					mention,
+					f'{" ".join(entry["context"])}--{mention}',
+					1,
+					0,
+					])
+				
+	for doc in tqdm.tqdm(dictionary[:20], position = pos):
 		process(doc)
 
 with multiprocessing.Pool(3) as pool: 
