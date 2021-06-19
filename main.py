@@ -167,6 +167,9 @@ if __name__ == "__main__":
     conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
     print(type(conll.train))
     print(conll.train['528 SQUASH) 528 SQUASH)'][0].keys())
+    print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
+    print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
+
     sys.exit()
     print('create model')
     word_voca, word_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.word',
