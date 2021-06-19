@@ -31,7 +31,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	(pos, dataset) = dataset
-	(_, dictionary) = dataset
+	(name , dictionary) = dataset
 	tmp = []
 	def process(doc):
 		for entry in dictionary[doc]:
@@ -52,8 +52,10 @@ def generate_csv(dataset):
 					0,
 					])
 				
-	for doc in tqdm.tqdm(list(dictionary.keys())[:20], position = pos):
+	for doc in tqdm.tqdm(list(dictionary.keys())[:100], position = pos):
 		process(doc)
+	print(tmp)
+	
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
