@@ -167,7 +167,7 @@ if __name__ == "__main__":
     conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
     print(type(conll.train))
     print(conll.train['528 SQUASH) 528 SQUASH)'][0].keys())
-    print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
+    print(len(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates']))
     print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
 
     sys.exit()
