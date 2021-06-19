@@ -28,7 +28,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
-datasets = [('train', conll.train, ('testA', conll.testA), ('testB', conll.testB)]
+datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	(pos, dataset) = dataset
 	(name, dictionary) = dataset
