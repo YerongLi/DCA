@@ -312,7 +312,6 @@ class CoNLLDatasetOnly:
         self.train = read_csv_file(path + '/aida_train.csv')
         self.testA = read_csv_file(path + '/aida_testA.csv')
         self.testB = read_csv_file(path + '/aida_testB.csv')
-        print(self.train.keys())
         # self.msnbc = read_csv_file(path + '/wned-msnbc.csv')
         # self.ace2004 = read_csv_file(path + '/wned-ace2004.csv')
         # self.aquaint = read_csv_file(path + '/wned-aquaint.csv')
