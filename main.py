@@ -168,7 +168,7 @@ if __name__ == "__main__":
     print(type(conll.train))
     print(conll.train['528 SQUASH) 528 SQUASH)'][0].keys())
     print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
-    print(conll.train[' 528 SQUASH)'][0]['gold'])
+    print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
     print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
     print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 
