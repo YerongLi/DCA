@@ -210,7 +210,7 @@ def read_conll_file(data, path):
                     # print(cur_conll_m_id, cur_conll_mention, mention)
                     # flag = 1
                     cur_conll_m_id += 1
-        print(doclist)
+        print(doclist, 'doclist')
         return doclist
 
 
