@@ -38,6 +38,7 @@ def generate_csv(dataset):
 			print(groundtruth)
 			print(entry['mention'])
 			print(entry['candidates'])
+			sys.exit()
 	for doc in tqdm.tqdm(dictionary, position = pos):
 		process(doc)
 
