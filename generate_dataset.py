@@ -20,7 +20,7 @@ mtype2id = {'PER':0, 'ORG':1, 'GPE':2, 'UNK':3}
 entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entity',
                                                           voca_emb_dir + 'entity_embeddings.npy')
 print('load conll at', datadir)
-conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
+conll = D.CoNLLDataset(datadir, conll_path, person_path, 'offset', 'SL')
 print(conll.train['528 SQUASH) 528 SQUASH)'][0].keys())
 print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
 print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
