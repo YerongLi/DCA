@@ -5,7 +5,6 @@ import dataset as D
 import utils
 from pprint import pprint
 import pickle
-from DCA.ed_ranker import EDRanker
 import time
 import tqdm
 
