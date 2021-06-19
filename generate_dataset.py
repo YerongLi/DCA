@@ -8,6 +8,12 @@ import pickle as pkl
 import time
 import tqdm
 
+datadir = '../data/generated/test_train_data'
+conll_path = '../data/basic_data/test_datasets'
+person_path = '../data/basic_data/p_e_m_data/persons.txt'
+voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
+ent_inlinks_path = "../data/entityid_dictid_inlinks_uniq.pkl"
+
 doc2type = pkl.load(open('../data/doc2type.pkl', 'rb'))
 entity2type = pkl.load(open('../data/entity2type.pkl', 'rb'))
 mtype2id = {'PER':0, 'ORG':1, 'GPE':2, 'UNK':3}
