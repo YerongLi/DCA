@@ -36,6 +36,8 @@ def generate_csv(dataset):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			print(groundtruth)
+			print(entry['mention'])
+			print(entry['candidates'])
 	for doc in tqdm.tqdm(dictionary, position = pos):
 		process(doc)
 
