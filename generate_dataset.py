@@ -7,6 +7,7 @@ from pprint import pprint
 import pickle as pkl
 import time
 import tqdm
+import multiprocessing
 
 datadir = '../data/generated/test_train_data'
 conll_path = '../data/basic_data/test_datasets'
@@ -27,6 +28,15 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
+datasets = [('train', conll.train, 0), ('testA', conll.testA, 1), ('testB', conll.testB, 1)]
+def generate_csv(dataset):
+	(name, dictionary, pos) = dataset
+	pbar=tqdm.tqdm(dictionary, pos)
+	for doc in pbar:
+		pass
+
+with multiprocessing.Pool(3) as pool: 
+	pool.map(generate_csv, datasets)
 with open('../data/generated/test_train_data/aida_train.csv') as f:
 	dicmention = dict()
 	count  = 0
