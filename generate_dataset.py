@@ -4,7 +4,7 @@ import json
 import dataset as D
 import utils
 from pprint import pprint
-import pickle
+import pickle as pkl
 import time
 import tqdm
 
