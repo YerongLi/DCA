@@ -147,7 +147,6 @@ def find_coref(ment, mentlist, person_names):
 
 def read_conll_file(data, path):
     conll = {}
-    doclist = []
     with open(path, 'r', encoding='utf8') as f:
         cur_sent = None
         cur_doc = None
@@ -209,9 +208,6 @@ def read_conll_file(data, path):
                     # print(cur_conll_m_id, cur_conll_mention, mention)
                     # flag = 1
                     cur_conll_m_id += 1
-    print(conll['1'])
-    print(doclist, 'doclist')
-    return doclist
 
 
 def reorder_dataset(data, order):
