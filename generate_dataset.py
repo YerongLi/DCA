@@ -26,6 +26,7 @@ print(conll.train['528 SQUASH) 528 SQUASH)'][0]['candidates'])
 print(conll.train['528 SQUASH) 528 SQUASH)'][0]['gold'])
 print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
+conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
 with open('../data/generated/test_train_data/aida_train.csv') as f:
 	dicmention = dict()
 	count  = 0

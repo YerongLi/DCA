@@ -147,6 +147,7 @@ def find_coref(ment, mentlist, person_names):
 
 def read_conll_file(data, path):
     conll = {}
+    doclist = []
     with open(path, 'r', encoding='utf8') as f:
         cur_sent = None
         cur_doc = None
@@ -157,6 +158,7 @@ def read_conll_file(data, path):
                 docname = line.split()[1][1:]
                 conll[docname] = {'sentences': [], 'mentions': []}
                 cur_doc = conll[docname]
+                doclist.append(cur_doc)
                 cur_sent = []
 
             else:
@@ -208,6 +210,8 @@ def read_conll_file(data, path):
                     # print(cur_conll_m_id, cur_conll_mention, mention)
                     # flag = 1
                     cur_conll_m_id += 1
+        print(doclist)
+        return doclist
 
 
 def reorder_dataset(data, order):
@@ -300,4 +304,52 @@ class CoNLLDataset:
         reorder_dataset(self.aquaint, order)
         reorder_dataset(self.clueweb, order)
         reorder_dataset(self.wikipedia, order)
+
+class CoNLLDatasetOnly:
+    """
+    reading dataset from CoNLL dataset, extracted by https://github.com/dalab/deep-ed/
+    """
+
+    def __init__(self, path, conll_path, person_path, order, method):
+        print('load csv')
+        self.train = read_csv_file(path + '/aida_train.csv')
+        self.testA = read_csv_file(path + '/aida_testA.csv')
+        self.testB = read_csv_file(path + '/aida_testB.csv')
+        # self.msnbc = read_csv_file(path + '/wned-msnbc.csv')
+        # self.ace2004 = read_csv_file(path + '/wned-ace2004.csv')
+        # self.aquaint = read_csv_file(path + '/wned-aquaint.csv')
+        # self.clueweb = read_csv_file(path + '/wned-clueweb.csv')
+        # self.wikipedia = read_csv_file(path + '/wned-wikipedia.csv')
+        # self.wikipedia.pop('Jiří_Třanovský Jiří_Třanovský', None)
+
+        print('process coref')
+        person_names = load_person_names(person_path)
+        with_coref(self.train, person_names)
+        with_coref(self.testA, person_names)
+        with_coref(self.testB, person_names)
+        # with_coref(self.msnbc, person_names)
+        # with_coref(self.ace2004, person_names)
+        # with_coref(self.aquaint, person_names)
+        # with_coref(self.clueweb, person_names)
+        # with_coref(self.wikipedia, person_names)
+
+        print('load conll')
+        read_conll_file(self.train, conll_path + '/AIDA/aida_train.txt')
+        read_conll_file(self.testA, conll_path + '/AIDA/testa_testb_aggregate_original')
+        read_conll_file(self.testB, conll_path + '/AIDA/testa_testb_aggregate_original')
+        # read_conll_file(self.msnbc, conll_path + '/wned-datasets/msnbc/msnbc.conll')
+        # read_conll_file(self.ace2004, conll_path + '/wned-datasets/ace2004/ace2004.conll')
+        # read_conll_file(self.aquaint, conll_path + '/wned-datasets/aquaint/aquaint.conll')
+        # read_conll_file(self.clueweb, conll_path + '/wned-datasets/clueweb/clueweb.conll')
+        # read_conll_file(self.wikipedia, conll_path + '/wned-datasets/wikipedia/wikipedia.conll')
+
+        print('reorder mentions within the dataset')
+        reorder_dataset(self.train, order)
+        reorder_dataset(self.testA, order)
+        reorder_dataset(self.testB, order)
+        # reorder_dataset(self.msnbc, order)
+        # reorder_dataset(self.ace2004, order)
+        # reorder_dataset(self.aquaint, order)
+        # reorder_dataset(self.clueweb, order)
+        # reorder_dataset(self.wikipedia, order)
 
