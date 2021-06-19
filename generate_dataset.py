@@ -8,7 +8,7 @@ import pickle as pkl
 import time
 import tqdm
 import multiprocessing
-
+import pandas as pd
 datadir = '../data/generated/test_train_data'
 conll_path = '../data/basic_data/test_datasets'
 person_path = '../data/basic_data/p_e_m_data/persons.txt'
@@ -32,7 +32,7 @@ datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.test
 def generate_csv(dataset):
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
-	tmp = []
+	data = []
 	def process(doc):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
@@ -42,7 +42,7 @@ def generate_csv(dataset):
 				cname = c.replace('_', ' ')
 				if 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
-				tmp.append([f'{doc}==={" ".join(entry["context"])}',
+				data.append([f'{doc}==={" ".join(entry["context"])}',
 					f'{mention};{cname}',
 					str([0.0] * 20),
 					1 if c == groundtruth else 0,
@@ -54,8 +54,8 @@ def generate_csv(dataset):
 				
 	for doc in tqdm.tqdm(list(dictionary.keys())[:100], position = pos):
 		process(doc)
-	print(tmp[0])
-	print(tmp[-1])
+	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
+	df.to_csv(f'full_{name}.csv', index = False)
 	
 
 with multiprocessing.Pool(3) as pool: 
