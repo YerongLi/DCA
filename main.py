@@ -166,6 +166,7 @@ if __name__ == "__main__":
     print('load conll at', datadir)
     conll = D.CoNLLDataset(datadir, conll_path, person_path, args.order, args.method)
     print(type(conll.train))
+    print(conll.train.keys())
     sys.exit()
     print('create model')
     word_voca, word_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.word',
