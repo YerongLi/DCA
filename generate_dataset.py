@@ -32,8 +32,11 @@ datasets = [('train', conll.train, ('testA', conll.testA), ('testB', conll.testB
 def generate_csv(dataset):
 	(pos, dataset) = dataset
 	(name, dictionary) = dataset
+	def process(doc):
+		(groundtruth, _, _) = dictionary[doc['gold']]
+		print(groundtruth)
 	for doc in tqdm.tqdm(dictionary, position = pos):
-		time.sleep(0.005)
+		
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
