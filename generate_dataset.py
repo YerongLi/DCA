@@ -28,14 +28,15 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
-datasets = [('train', conll.train, 0), ('testA', conll.testA, 1), ('testB', conll.testB, 1)]
+datasets = [('train', conll.train, ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
-	(name, dictionary, pos) = dataset
+	(pos, dataset) = dataset
+	(name, dictionary) = dataset
 	for doc in tqdm.tqdm(dictionary, position = pos):
 		time.sleep(0.005)
 
 with multiprocessing.Pool(3) as pool: 
-	pool.map(generate_csv, datasets)
+	pool.map(generate_csv, enumerate(datasets))
 with open('../data/generated/test_train_data/aida_train.csv') as f:
 	dicmention = dict()
 	count  = 0
