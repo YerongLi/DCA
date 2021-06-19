@@ -158,7 +158,7 @@ def read_conll_file(data, path):
                 docname = line.split()[1][1:]
                 conll[docname] = {'sentences': [], 'mentions': []}
                 cur_doc = conll[docname]
-                doclist.append(cur_doc)
+                doclist.append(docname)
                 cur_sent = []
 
             else:
