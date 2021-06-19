@@ -37,15 +37,15 @@ with open('../data/generated/test_train_data/aida_train.csv') as f:
 		# 	if 'en.wikipedia.org/wiki/' + c in entity_voca.word2id:
 		# 		count+= 1
 				# print('https://en.wikipedia.org/wiki/' + c, count)
-		tmp.append([f'{doc}==={""}',
-			f'{l[2]};{na}',
-			str([0.0] * 20),
-			label,
-			csvfile.iloc[i].Mention,
-			f'{csvfile.iloc[i].Sentence}--{csvfile.iloc[i].Mention}',
-			1,
-			0,
-			])
+		# tmp.append([f'{doc}==={""}',
+		# 	f'{l[2]};{na}',
+		# 	str([0.0] * 20),
+		# 	label,
+		# 	csvfile.iloc[i].Mention,
+		# 	f'{csvfile.iloc[i].Sentence}--{csvfile.iloc[i].Mention}',
+		# 	1,
+		# 	0,
+		# 	])
 		# if 'en.wikipedia.org/wiki/' + groundtruth in entity_voca.word2id:
 		# 	count+= 1
 		# 	print('https://en.wikipedia.org/wiki/' + groundtruth, count)
