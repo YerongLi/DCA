@@ -1,14 +1,11 @@
 import sys
 sys.path.insert(0, "../")
 import json
-import DCA.dataset as D
-import argparse
-import DCA.utils as utils
+import dataset as D
+import utils
 from pprint import pprint
-import torch
 import pickle
 from DCA.ed_ranker import EDRanker
-import csv
 import time
 import tqdm
 
