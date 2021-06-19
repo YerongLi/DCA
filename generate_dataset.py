@@ -52,7 +52,7 @@ def generate_csv(dataset):
 					0,
 					])
 				
-	for doc in tqdm.tqdm(dictionary[:20], position = pos):
+	for doc in tqdm.tqdm(dictionary.keys()[:20], position = pos):
 		process(doc)
 
 with multiprocessing.Pool(3) as pool: 
