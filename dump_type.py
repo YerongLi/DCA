@@ -44,10 +44,10 @@ def dump(dataset):
 			for candidate in entry['candidates']:
 				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
 				# print(candidate)
-				if c not in resjson: resjson[c] = [ref_count, tipe]
-				if ref_count != resjson[c][0]: 
-					print(candidate)
-					print(resjson[c])
+				if c not in resjson: resjson[c] = tipe
+				# if ref_count != resjson[c][0]: 
+					# print(candidate)
+					# print(resjson[c])
 				assert(tipe == resjson[c][1])
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
