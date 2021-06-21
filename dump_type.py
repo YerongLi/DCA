@@ -48,12 +48,12 @@ def dump(dataset):
 				# if ref_count != resjson[c][0]: 
 					# print(candidate)
 					# print(resjson[c])
-				assert(tipe == resjson[c][1])
+				assert(tipe == resjson[c])
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
-print(resjson)
+# print(resjson)
 with multiprocessing.Pool(3) as pool: 
 	pool.map(dump, enumerate(datasets))
 with open('refCount.json', 'w') as fp:
