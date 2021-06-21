@@ -41,3 +41,12 @@ def dump(dataset):
 			for candidate in entry['candidates']:
 				print(candidate)
 				sys.exit()
+
+	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
+	# 	process(doc)
+	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
+	# df.to_csv(f'full_{name}.csv', index = False)
+	
+
+with multiprocessing.Pool(3) as pool: 
+	pool.map(generate_csv, enumerate(datasets))
