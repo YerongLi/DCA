@@ -36,7 +36,7 @@ def dump(dataset):
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
 
-	for doc in tqdm.tqdm(list(dictionary.keys())):
+	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
