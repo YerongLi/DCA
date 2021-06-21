@@ -46,7 +46,7 @@ def generate_csv(dataset):
 				featurev[16] = candidate[1]
 				data.append([f'{doc}==={" ".join(entry["context"])}',
 					f'{mention};{cname}',
-					str(),
+					str(featurev),
 					1 if c == groundtruth else 0,
 					mention,
 					f'{doc+"==="+" ".join(entry["context"])}--{mention}',
