@@ -49,4 +49,4 @@ def dump(dataset):
 	
 
 with multiprocessing.Pool(3) as pool: 
-	pool.map(generate_csv, enumerate(datasets))
+	pool.map(dump, enumerate(datasets))
