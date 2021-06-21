@@ -40,8 +40,10 @@ def dump(dataset):
 			for candidate in entry['candidates']:
 				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
 				print(ref_count, tipe)
-				print(candidate)
-				sys.exit()
+				# print(candidate)
+				if c not in resjon: resjon[c] = [ref_count, tipe]
+				assert(ref_count == resjon[c][0])
+				assert(type == resjon[c][1])
 	for doc in tqdm.tqdm(list(dictionary.keys())):
 		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
