@@ -40,9 +40,9 @@ def dump(dataset):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
+			print(sum([candidate[0] for candidate in entry['candidates']]))
 			for candidate in entry['candidates']:
 				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
-				print(ref_count, tipe)
 				# print(candidate)
 				if c not in resjson: resjson[c] = [ref_count, tipe]
 				if ref_count != resjson[c][0]: 
