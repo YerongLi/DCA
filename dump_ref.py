@@ -38,10 +38,10 @@ def dump(dataset):
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
 			for candidate in entry['candidates']:
+				c, ref_count, tipe = candidate[0], candidate[1], candidate[2] 
 				print(candidate)
 				sys.exit()
 	for doc in tqdm.tqdm(list(dictionary.keys())):
-		print(doc)
 		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
@@ -50,5 +50,5 @@ def dump(dataset):
 	
 dump((0, ('train', conll.train)))
 
-# with multiprocessing.Pool(3) as pool: 
-# 	pool.map(dump, enumerate(datasets))
+with multiprocessing.Pool(3) as pool: 
+	pool.map(dump, enumerate(datasets))
