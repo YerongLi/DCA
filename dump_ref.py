@@ -38,7 +38,8 @@ def dump(dataset):
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
 			for candidate in entry['candidates']:
-				c, ref_count, tipe = candidate[0], candidate[1], candidate[2] 
+				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
+				print(ref_count, tipe)
 				print(candidate)
 				sys.exit()
 	for doc in tqdm.tqdm(list(dictionary.keys())):
@@ -47,8 +48,6 @@ def dump(dataset):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
-	
-dump((0, ('train', conll.train)))
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(dump, enumerate(datasets))
