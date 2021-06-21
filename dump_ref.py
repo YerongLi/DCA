@@ -44,7 +44,7 @@ def dump(dataset):
 				# print(candidate)
 				if c not in resjon: resjon[c] = [ref_count, tipe]
 				assert(ref_count == resjon[c][0])
-				assert(type == resjon[c][1])
+				assert(tipe == resjon[c][1])
 	for doc in tqdm.tqdm(list(dictionary.keys())):
 		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
