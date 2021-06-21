@@ -40,7 +40,7 @@ def dump(dataset):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
-			print(sum([candidate[0] for candidate in entry['candidates']]))
+			print(sum([candidate[1] for candidate in entry['candidates']]))
 			for candidate in entry['candidates']:
 				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
 				print(candidate)
