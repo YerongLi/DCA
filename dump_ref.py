@@ -30,7 +30,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 m = multiprocessing.Manager()
-resjon = m.dict()
+resjson = m.dict()
 def dump(dataset):
 	global resjson
 	(pos, dataset) = dataset
@@ -44,15 +44,17 @@ def dump(dataset):
 				c, ref_count, tipe = candidate[0], candidate[1], candidate[2].index(1)
 				print(ref_count, tipe)
 				# print(candidate)
-				if c not in resjon: resjon[c] = [ref_count, tipe]
-				assert(ref_count == resjon[c][0])
-				assert(tipe == resjon[c][1])
+				if c not in resjson: resjson[c] = [ref_count, tipe]
+				if ref_count != resjson[c][0]: 
+					print(candidate)
+					print(resjson[c])
+				assert(tipe == resjson[c][1])
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
-print(resjon)
+print(resjson)
 with multiprocessing.Pool(3) as pool: 
 	pool.map(dump, enumerate(datasets))
 with open('refCount.json', 'w') as fp:
-    json.dump(resjon, fp)
+    json.dump(resjson, fp)
