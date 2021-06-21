@@ -36,7 +36,7 @@ def dump(dataset):
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
 
-	for doc in tqdm.tqdm(list(dictionary.keys())[:10], position = pos):
+	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
@@ -56,5 +56,5 @@ def dump(dataset):
 # print(resjson)
 with multiprocessing.Pool(3) as pool: 
 	pool.map(dump, enumerate(datasets))
-with open('refCount.json', 'w') as fp:
+with open('entityType.json', 'w') as fp:
     json.dump(dict(resjson), fp)
