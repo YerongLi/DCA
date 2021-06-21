@@ -29,7 +29,8 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
-resjon = dict()
+m = multiprocessing.Manager()
+resjon = m.dict()
 def dump(dataset):
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
@@ -50,6 +51,8 @@ def dump(dataset):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
-
+print(resjon)
 with multiprocessing.Pool(3) as pool: 
 	pool.map(dump, enumerate(datasets))
+with open('refCount.json', 'w') as fp:
+    json.dump(resjon, fp)
