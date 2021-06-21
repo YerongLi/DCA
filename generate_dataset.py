@@ -42,9 +42,11 @@ def generate_csv(dataset):
 				cname = c.replace('_', ' ')
 				if 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
+				featurev = [0.0] * 27
+				featurev[16] = candidate[1]
 				data.append([f'{doc}==={" ".join(entry["context"])}',
 					f'{mention};{cname}',
-					str([0.0] * 27),
+					str(),
 					1 if c == groundtruth else 0,
 					mention,
 					f'{doc+"==="+" ".join(entry["context"])}--{mention}',
