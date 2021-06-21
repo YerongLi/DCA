@@ -31,6 +31,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 resjon = dict()
 def dump(dataset):
+	(pos, dataset) = dataset
 	(name , dictionary) = dataset
 	def process(doc):
 		for entry in dictionary[doc]:
@@ -39,13 +40,14 @@ def dump(dataset):
 			for candidate in entry['candidates']:
 				print(candidate)
 				sys.exit()
-
+	for doc in tqdm.tqdm(list(dictionary.keys())):
+		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
 	
-dump(('train', conll.train))
+dump((0, ('train', conll.train)))
 
 # with multiprocessing.Pool(3) as pool: 
 # 	pool.map(dump, enumerate(datasets))
