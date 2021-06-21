@@ -32,9 +32,11 @@ datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.test
 m = multiprocessing.Manager()
 resjon = m.dict()
 def dump(dataset):
+	global resjson
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
-	def process(doc):
+
+	for doc in tqdm.tqdm(list(dictionary.keys())):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			mention = entry['mention']
@@ -45,8 +47,6 @@ def dump(dataset):
 				if c not in resjon: resjon[c] = [ref_count, tipe]
 				assert(ref_count == resjon[c][0])
 				assert(tipe == resjon[c][1])
-	for doc in tqdm.tqdm(list(dictionary.keys())):
-		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
