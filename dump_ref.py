@@ -41,6 +41,7 @@ def dump(dataset):
 				print(candidate)
 				sys.exit()
 	for doc in tqdm.tqdm(list(dictionary.keys())):
+		print(doc)
 		process(doc)
 	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 	# 	process(doc)
