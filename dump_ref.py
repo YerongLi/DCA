@@ -31,9 +31,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 resjon = dict()
 def dump(dataset):
-	(pos, dataset) = dataset
 	(name , dictionary) = dataset
-	data = []
 	def process(doc):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
@@ -47,6 +45,7 @@ def dump(dataset):
 	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
 	# df.to_csv(f'full_{name}.csv', index = False)
 	
+dump(('train', conll.train))
 
-with multiprocessing.Pool(3) as pool: 
-	pool.map(dump, enumerate(datasets))
+# with multiprocessing.Pool(3) as pool: 
+# 	pool.map(dump, enumerate(datasets))
