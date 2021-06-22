@@ -12,7 +12,7 @@ with open(ent_inlinks_path, 'rb') as f_pkl:
 print(ent_inlinks_dict[262048])
 
 ent_desc = json.load(open('../data/ent2desc.json', 'r'))
-print(ent_desc['German_language'])
+print(ent_desc['Germany'])
 
 voca_emb_dir = "../data/generated/embeddings/word_ent_embs/"
 
