@@ -23,6 +23,7 @@ entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entit
 i = entity_voca.word2id['en.wikipedia.org/wiki/Germany']
 print(i)
 print(entity_voca.id2word[i], 'original')
+print(ent_inlinks_dict[i])
 for j in ent_inlinks_dict[i]:
 	print(entity_voca.id2word[j])
 print(ent_inlinks_dict[i])
