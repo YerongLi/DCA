@@ -19,7 +19,7 @@ while r < n:
 		m = max(features)
 		mi = features.index(m)
 		pred = batch.Mention_label.values[mi].split(';')[1]
-		print(gt.QuuestionMention.values[0], gt, pred)
+		print(gt.QuestionMention.values[0], gt, pred)
 	except:
 		import traceback
 		traceback.print_exc()
