@@ -42,3 +42,4 @@ while r < n:
 # 	error_df.to_csv('error.csv', index=False)
 # except:
 	# pass
+print(count)
