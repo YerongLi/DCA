@@ -30,7 +30,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
-tjson = json.load('entityType.json')
+tjson = json.load(open('entityType.json', 'r'))
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	(pos, dataset) = dataset
