@@ -4,7 +4,7 @@ import pandas as pd
 df_ = pd.read_csv('full_testA.csv')
 
 n, l, r = df_.shape[0], 0, 0
-
+count = 0
 # try:
 while r < n:
 	while r < n - 1 and df_.iloc[l]['QuestionMention'] == df_.iloc[r + 1]['QuestionMention']:
@@ -37,6 +37,7 @@ while r < n:
 	# 	f"https://dbpedia.org/page{batch.iloc[j]['Mention_label'].split(';')[1].replace(' ', '_')}"])
 	l = r + 1
 	r = l
+	count += 1
 # 	error_df =  pd.DataFrame(data, columns = ['QuestionMention','gold','pred'])
 # 	error_df.to_csv('error.csv', index=False)
 # except:
