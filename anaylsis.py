@@ -14,7 +14,7 @@ while r < n:
 	# print(gt)
 	gtn = gt.Mention_label.values[0].split(';')[1]
 	print(gtn)
-	features = batch.features
+	features = batch.Features
 	# # assert(len(gold_pairs) == 1)
 	# gt = gt[0].split(';')[1].replace(' ', '_')
 	# # j = torch.argmax(pred_[l:r + 1]).numpy()
