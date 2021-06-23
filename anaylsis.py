@@ -13,8 +13,13 @@ while r < n:
 	gt = batch[batch.Label.eq(1)]
 	# print(gt)
 	gtn = gt.Mention_label.values[0].split(';')[1]
-	print(gtn)
-	features = batch.Features
+	features = batch.Features.values
+	features = [eval(f)[16] for f in features]
+	m = max(features)
+	mi = features.index(m)
+	pred = batch.Mention_label.values[mi].split(';')[1]
+	print(gt.QuuestionMention.values[0], gt, pred)
+
 	# # assert(len(gold_pairs) == 1)
 	# gt = gt[0].split(';')[1].replace(' ', '_')
 	# # j = torch.argmax(pred_[l:r + 1]).numpy()
