@@ -9,6 +9,8 @@ import time
 import tqdm
 import multiprocessing
 import pandas as pd
+import json
+import os
 datadir = '../data/generated/test_train_data'
 conll_path = '../data/basic_data/test_datasets'
 person_path = '../data/basic_data/p_e_m_data/persons.txt'
@@ -28,6 +30,7 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
+tjson = json.load(os.getenv('entityType.json')
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	(pos, dataset) = dataset
@@ -36,6 +39,7 @@ def generate_csv(dataset):
 	def process(doc):
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
+			if not tjson[groundtruth] == 0: continue 
 			mention = entry['mention']
 			for candidate in entry['candidates']:
 				c = candidate[0]

@@ -171,7 +171,7 @@ if __name__ == "__main__":
     # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
     # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 
-    sys.exit()
+    # sys.exit()
     print('create model')
     word_voca, word_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.word',
                                                       voca_emb_dir + 'word_embeddings.npy')

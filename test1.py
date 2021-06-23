@@ -1,6 +1,7 @@
 import pickle
 import json
 import utils
+import os
 
 ent_inlinks_path = "../data/entityid_dictid_inlinks_uniq.pkl"
 
@@ -21,7 +22,7 @@ entity_voca, entity_embeddings = utils.load_voca_embs(voca_emb_dir + 'dict.entit
                                                           voca_emb_dir + 'entity_embeddings.npy')
 														  
 i = entity_voca.word2id['Berlin']
-print(i)
+print(os.getenv("HOME"))
 print(entity_voca.id2word[i], 'original')
 print(ent_inlinks_dict[i])
 for j in ent_inlinks_dict[i]:
