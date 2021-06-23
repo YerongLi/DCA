@@ -1,5 +1,5 @@
 import pandas as pd
-datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
+# datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 
 df_ = pd.read_csv('full_{name}.csv')
 
