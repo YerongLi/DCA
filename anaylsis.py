@@ -21,6 +21,8 @@ while r < n:
 		pred = batch.Mention_label.values[mi].split(';')[1]
 		print(gt.QuuestionMention.values[0], gt, pred)
 	except:
+		import traceback
+		traceback.print_exc()
 		pass
 
 	# # assert(len(gold_pairs) == 1)
