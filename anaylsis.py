@@ -20,7 +20,7 @@ while r < n:
 		mi = features.index(m)
 		pred = batch.Mention_label.values[mi].split(';')[1]
 		if pred != gtn:
-			print(type(gt.QuestionMention.values[0]), gt, pred)
+			print(gt.QuestionMention.values[0], gtn, pred)
 	except:
 		import traceback
 		traceback.print_exc()
