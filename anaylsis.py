@@ -10,8 +10,9 @@ while r < n:
 	while r < n - 1 and df_.iloc[l]['QuestionMention'] == df_.iloc[r + 1]['QuestionMention']:
 		r+= 1
 	batch = df_.iloc[l : r + 1]
-	gt = batch[batch.Label.eq(1)].values
-	gtn = gt.iloc[0]['Mention_label'].split(';')[1]
+	gt = batch[batch.Label.eq(1)]
+	print(gt)
+	gtn = gt.Mention_label.values.split(';')[0]
 	print(gtn)
 	features = df_.features
 	# # assert(len(gold_pairs) == 1)
