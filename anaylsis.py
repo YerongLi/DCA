@@ -14,13 +14,14 @@ while r < n:
 		gt = batch[batch.Label.eq(1)]
 		# print(gt)
 		gtn = gt.Mention_label.values[0].split(';')[1]
+		mention = gt.Mention.values[0]
 		features = batch.Features.values
 		features = [eval(f)[16] for f in features]
 		m = max(features)
 		mi = features.index(m)
 		pred = batch.Mention_label.values[mi].split(';')[1]
-		if pred != gtn:
-			print(f'groundtruth: {gtn}, {pred}')
+		if gtn.find(mention):
+			print(f'groundtruth: {mention}, {pred}')
 			print(gt.QuestionMention.values[0])
 	except:
 		import traceback
@@ -37,9 +38,9 @@ while r < n:
 	# 	f"https://dbpedia.org/page{batch.iloc[j]['Mention_label'].split(';')[1].replace(' ', '_')}"])
 	l = r + 1
 	r = l
-	count += 1
+	# count += 1
 # 	error_df =  pd.DataFrame(data, columns = ['QuestionMention','gold','pred'])
 # 	error_df.to_csv('error.csv', index=False)
 # except:
 	# pass
-print(count)
+# print(count)
