@@ -5,11 +5,13 @@ df_ = pd.read_csv('full_testA.csv')
 
 n, l, r = df_.shape[0], 0, 0
 count = 0
+total = 0
 # try:
 while r < n:
 	while r < n - 1 and df_.iloc[l]['QuestionMention'] == df_.iloc[r + 1]['QuestionMention']:
 		r+= 1
 	try:
+		total+= 1
 		batch = df_.iloc[l : r + 1]
 		gt = batch[batch.Label.eq(1)]
 		# print(gt)
@@ -23,6 +25,7 @@ while r < n:
 		if gtn.find(mention):
 			print(f'groundtruth: {mention}, {pred}')
 			print(gt.QuestionMention.values[0])
+			count+= 1
 	except:
 		import traceback
 		traceback.print_exc()
@@ -43,4 +46,4 @@ while r < n:
 # 	error_df.to_csv('error.csv', index=False)
 # except:
 	# pass
-# print(count)
+print(f'{count}/{total}')
