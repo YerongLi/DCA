@@ -1,7 +1,7 @@
 import pandas as pd
 # datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 
-df_ = pd.read_csv('full_testA.csv')
+df_ = pd.read_csv('full_testB.csv')
 
 n, l, r = df_.shape[0], 0, 0
 count = 0
