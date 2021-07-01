@@ -207,11 +207,11 @@ if __name__ == "__main__":
                     # ('aida-train', conll.train),
                     ('aida-A', conll.testA),
                     ('aida-B', conll.testB),
-                    ('msnbc', conll.msnbc),
-                    ('aquaint', conll.aquaint),
-                    ('ace2004', conll.ace2004),
-                    ('clueweb', conll.clueweb),
-                    ('wikipedia', conll.wikipedia)
+                    # ('msnbc', conll.msnbc),
+                    # ('aquaint', conll.aquaint),
+                    # ('ace2004', conll.ace2004),
+                    # ('clueweb', conll.clueweb),
+                    # ('wikipedia', conll.wikipedia)
                 ]
 
     with open(F1_CSV_Path, 'w') as f_csv_f1:
