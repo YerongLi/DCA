@@ -967,8 +967,9 @@ class EDRanker:
                         self.rt_flag = False
                     predictions = self.predict(data, config['isDynamic'], order_learning)
                     #self.records[e][dname] = self.record
-                    print('predictions', predictions)
-                    with open('predictions.json', 'w') as fp:
+
+                    print('dname', predictions)
+                    with open(f'{dname}.json', 'w') as fp:
                         json.dump(predictions, fp)
 
                     f1 = D.eval(org_dev_datasets[di][1], predictions)
