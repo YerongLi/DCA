@@ -708,9 +708,8 @@ class EDRanker:
     #             self.model.print_weight_norm()
 
     # Heuristic Order Learning Method - Based on Mention-Local Similarity or Mention-Topical Similarity
-    def train(self, org_train_dataset, org_dev_datasets, config, evalTrue = True):
+    def train(self, org_train_dataset, org_dev_datasets, config):
         print('extracting training data')
-        print(self.args.model_path, 'self.args.model_path')
         train_dataset = self.get_data_items(org_train_dataset, predict=False, isTrain=True)
         print('#train docs', len(train_dataset))
         self.init_lr = config['lr']
@@ -718,88 +717,6 @@ class EDRanker:
         for dname, data in org_dev_datasets:
             dev_datasets.append((dname, self.get_data_items(data, predict=True, isTrain=False)))
             print(dname, '#dev docs', len(dev_datasets[-1][1]))
-        print('train_dataset', train_dataset[:100])
-        order_learning = True
-        if evalTrue:
-            dev_f1 = 0.
-            test_f1 = 0.
-            ave_f1 = 0.
-            #self.records[e] = dict()
-            for di, (dname, data) in enumerate(dev_datasets):
-                if dname == 'aida-B':
-                    self.rt_flag = True
-                else:
-                    self.rt_flag = False
-                # predictions = self.predict(data, config['isDynamic'], order_learning)
-                #self.records[e][dname] = self.record
-                f1 = D.eval(org_dev_datasets[di][1], predictions)
-
-                # predictions_1 = self.predict(data, 1, order_learning)
-                # f1_1 = D.eval(org_dev_datasets[di][1], predictions_1)
-                #
-                # predictions_2 = self.predict(data, 2, order_learning)
-                # f1_2 = D.eval(org_dev_datasets[di][1], predictions_2)
-
-                print(dname, utils.tokgreen('micro F1: ' + str(f1)), flush=True)
-
-                with open(self.output_path, 'a') as eval_csv_f1:
-                    eval_f1_csv_writer = csv.writer(eval_csv_f1)
-                    eval_f1_csv_writer.writerow([dname, e, 0, f1])
-                    #eval_f1_csv_writer.writerow([dname, e, 1, f1_1])
-                    #eval_f1_csv_writer.writerow([dname, e, 2, f1_2])
-                # temp_rlt.append([dname, f1])
-                if dname == 'aida-A':
-                    dev_f1 = f1
-                if dname == 'aida-B':
-                    test_f1 = f1
-                ave_f1 += f1
-            # if dev_f1>best_aida_A_f1:
-            #     best_aida_A_f1 = dev_f1
-            #     best_aida_A_rlts = copy.deepcopy(temp_rlt)
-            # if test_f1>best_aida_B_f1:
-            #     best_aida_B_f1 = test_f1
-            #     best_aida_B_rlts = copy.deepcopy(temp_rlt)
-            # if ave_f1 > best_ave_f1:
-            #     best_ave_f1 = ave_f1
-            #     best_ave_rlts = copy.deepcopy(temp_rlt)
-
-            if not config['isDynamic']:
-                self.record_runtime('DCA')
-            else:
-                self.record_runtime('local')
-
-            #json.dump(self.records, open('records.json', 'w'), indent=4)
-            if config['lr'] == self.init_lr and dev_f1 >= self.args.dev_f1_change_lr:
-                eval_after_n_epochs = 2
-                is_counting = True
-                best_f1 = dev_f1
-                not_better_count = 0
-
-                # self.model.switch_order_learning(0)
-                config['lr'] = self.init_lr / 2
-                print('change learning rate to', config['lr'])
-                optimizer = optim.Adam([p for p in self.model.parameters() if p.requires_grad], lr=config['lr'])
-
-                for param_name, param in self.model.named_parameters():
-                    if param.requires_grad:
-                        print(param_name)
-
-            if dev_f1 >= self.args.dev_f1_start_order_learning and self.args.order_learning:
-                order_learning = True
-
-            if is_counting:
-                if dev_f1 < best_f1:
-                    not_better_count += 1
-                else:
-                    not_better_count = 0
-                    best_f1 = dev_f1
-                    print('save model to', self.args.model_path)
-                    self.model.save(self.args.model_path)
-
-            if not_better_count == self.args.n_not_inc:
-                return
-
-            self.model.print_weight_norm()
 
         print('creating optimizer')
         optimizer = optim.Adam([p for p in self.model.parameters() if p.requires_grad], lr=config['lr'])
@@ -810,7 +727,7 @@ class EDRanker:
 
         best_f1 = -1
         not_better_count = 0
-        is_counting = True 
+        is_counting = False
         eval_after_n_epochs = self.args.eval_after_n_epochs
 
         order_learning = False
@@ -1050,7 +967,6 @@ class EDRanker:
                         self.rt_flag = False
                     predictions = self.predict(data, config['isDynamic'], order_learning)
                     #self.records[e][dname] = self.record
-                    print('predictions', predictions)
                     f1 = D.eval(org_dev_datasets[di][1], predictions)
 
                     # predictions_1 = self.predict(data, 1, order_learning)
