@@ -969,7 +969,7 @@ class EDRanker:
                     #self.records[e][dname] = self.record
 
                     print('dname', predictions)
-                    with open(f'{dname}.json', 'w') as fp:
+                    with open(dname + '.json', 'w') as fp:
                         json.dump(predictions, fp)
 
                     f1 = D.eval(org_dev_datasets[di][1], predictions)
