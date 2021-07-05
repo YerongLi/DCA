@@ -62,7 +62,7 @@ def generate_csv(dataset):
 					f'{pre_doc+"==="+" ".join(entry["context"])}--{mention}',
 					1,
 					0,
-					entry["context"],
+					entry["context"][1],
 					])
 				
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
