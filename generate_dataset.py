@@ -59,7 +59,7 @@ def generate_csv(dataset):
 					str(featurev),
 					1 if c == groundtruth else 0,
 					mention,
-					f'{doc+"==="+" ".join(entry["context"])}--{mention}',
+					f'{pre_doc+"==="+" ".join(entry["context"])}--{mention}',
 					1,
 					0,
 					entry["context"],
