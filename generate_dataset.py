@@ -48,6 +48,7 @@ def generate_csv(dataset):
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
+				print(doc)
 				print(entry["context"])
 				print(mention)
 				sys.exit()
