@@ -48,7 +48,10 @@ def generate_csv(dataset):
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
-				data.append([f'{doc}==={" ".join(entry["context"])}',
+				print(entry["context"])
+				print(mention)
+				sys.exit()
+				data.append([f'{doc}==={entry["context"][0]}',
 					f'{mention};{cname}',
 					str(featurev),
 					1 if c == groundtruth else 0,
