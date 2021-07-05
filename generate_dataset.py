@@ -49,11 +49,11 @@ def generate_csv(dataset):
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
-				print(doc)
-				print(pre_doc)
-				print(entry["context"])
-				print(mention)
-				sys.exit()
+				# print(doc)
+				# print(pre_doc)
+				# print(entry["context"])
+				# print(mention)
+				# sys.exit()
 				data.append([f'{pre_doc}==={entry["context"][0]}',
 					f'{mention};{cname}',
 					str(featurev),
@@ -62,11 +62,12 @@ def generate_csv(dataset):
 					f'{doc+"==="+" ".join(entry["context"])}--{mention}',
 					1,
 					0,
+					entry["context"],
 					])
 				
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
-	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
+	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right'])
 	df.to_csv(f'full_{name}.csv', index = False)
 	
 
