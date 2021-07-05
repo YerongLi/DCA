@@ -37,6 +37,7 @@ def generate_csv(dataset):
 	(name , dictionary) = dataset
 	data = []
 	def process(doc):
+		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			if groundtruth in tjson and not tjson[groundtruth] == 0: continue 
@@ -49,10 +50,11 @@ def generate_csv(dataset):
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
 				print(doc)
+				print(pre_doc)
 				print(entry["context"])
 				print(mention)
 				sys.exit()
-				data.append([f'{doc}==={entry["context"][0]}',
+				data.append([f'{pre_doc}==={entry["context"][0]}',
 					f'{mention};{cname}',
 					str(featurev),
 					1 if c == groundtruth else 0,
