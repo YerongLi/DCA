@@ -1117,7 +1117,7 @@ class EDRanker:
                                                  isOrderFixed=True, isSort=self.args.sort)
 
             scores = scores.cpu().data.numpy()
-            print('scores', len(scores))
+            print('scores', len(scores), len(scores[0]))
             pred_ids = np.argmax(scores, axis=1)
             end_time = time.time()
             if self.rt_flag:
@@ -1126,7 +1126,7 @@ class EDRanker:
                 pred_entities = list()
 
                 decision_order, _ = self.model.get_order_truth()
-
+                print('batch', batch)
                 for mi, m in enumerate(batch):
                     pi = pred_ids[decision_order.index(mi)]
                     if m['selected_cands']['mask'][pi] == 1:
