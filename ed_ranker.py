@@ -1139,9 +1139,9 @@ class EDRanker:
                 pred_entities = [m['selected_cands']['named_cands'][i] if m['selected_cands']['mask'][i] == 1
                                  else (m['selected_cands']['named_cands'][0] if m['selected_cands']['mask'][0] == 1 else 'NIL')
                                  for (i, m) in zip(pred_ids, batch)]
-                pred_score = [{m['selected_cands']['named_cands'][i]: score[i] if m['selected_cands']['mask'][i] == 1
+                pred_score = [{m['selected_cands']['named_cands'][i] if m['selected_cands']['mask'][i] == 1
                                  else 'NIL'
-                                 for i in range(len(scores))}
+                                 for i in range(len(score))}
                                  for (score, m) in zip(scores, batch)]
             doc_names = [m['doc_name'] for m in batch]
             print('batch', batch)

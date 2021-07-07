@@ -204,7 +204,7 @@ if __name__ == "__main__":
     ranker = EDRanker(config=config)
 
     dev_datasets = [
-                    # ('aida-train', conll.train),
+                    ('aida-train', conll.train),
                     ('aida-A', conll.testA),
                     ('aida-B', conll.testB),
                     # ('msnbc', conll.msnbc),
