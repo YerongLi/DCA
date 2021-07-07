@@ -8,4 +8,5 @@ scores = [[list(pred['pred'].values()) for pred in predicions_score[doc_]] for d
 scores = list(flatten(scores))
 scores = list(flatten(scores))
 scores = [float(s) for s in scores if s != '-100']
-print(scores)
+print(max(scores))
+print(min(scores))
