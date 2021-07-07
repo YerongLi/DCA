@@ -1117,7 +1117,7 @@ class EDRanker:
                                                  isOrderFixed=True, isSort=self.args.sort)
 
             scores = scores.cpu().data.numpy()
-            print('scores', scores)
+            print('scores', len(scores))
             pred_ids = np.argmax(scores, axis=1)
             end_time = time.time()
             if self.rt_flag:
