@@ -54,7 +54,7 @@ def generate_csv(dataset):
 				# print(entry["context"])
 				# print(mention)
 				# sys.exit()
-				data.append([f'{entry["context"][0]}',
+				data.append([entry["context"][0],
 					f'{mention}==={cname}',
 					str(featurev),
 					1 if c == groundtruth else 0,
