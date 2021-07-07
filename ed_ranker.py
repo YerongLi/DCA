@@ -1072,7 +1072,7 @@ class EDRanker:
 
     def predict(self, data, dynamic_option, order_learning):
         predictions = {items[0]['doc_name']: [] for items in data}
-        predictions_score = {items[0]['doc_name']: [] for items in data}
+        predictions_score = {items[0]['doc_name'].split(' ')[0]: [] for items in data}
         
         self.model.eval()
         #self.record = []
@@ -1167,7 +1167,6 @@ class EDRanker:
                 for dname, entity in zip(doc_names, pred_entities):
                     predictions[dname].append({'pred': (entity, 0.)})
                 for dname, entity in zip(doc_names, pred_scores):
-                    print(entity)
                     predictions_score[dname.split(' ')[0]].append({'mention': entity[0], 'pred': entity[1]})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
         if '1094testa' in predictions_score:
