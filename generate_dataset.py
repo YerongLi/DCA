@@ -71,10 +71,10 @@ def generate_csv(dataset):
 				# 	0,
 				# 	])
 				
-	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
-		process(doc)
-	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
-	df.to_csv(f'full_{name}.csv', index = False)
+	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
+	# 	process(doc)
+	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
+	# df.to_csv(f'full_{name}.csv', index = False)
 	
 
 with multiprocessing.Pool(3) as pool: 
