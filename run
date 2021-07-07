@@ -1,1 +1,1 @@
-python main.py --mode train --order offset --model_path model --method SL
+git pull;time python main.py --mode train --order offset --model_path model --method SL

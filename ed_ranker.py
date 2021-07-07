@@ -968,7 +968,7 @@ class EDRanker:
                     predictions, _ = self.predict(data, config['isDynamic'], order_learning)
                     #self.records[e][dname] = self.record
 
-                    print('dname', predictions)
+                    # print('dname', predictions)
                     with open(dname + '.json', 'w') as fp:
                         json.dump(predictions, fp)
 
@@ -1158,6 +1158,6 @@ class EDRanker:
                     predictions[dname].append({'pred': (entity, 0.)})
                     predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        print('predictions_score', predictions_score)
+        print('predictions_score', predictions_score,keys())
         return predictions, predictions_score
 
