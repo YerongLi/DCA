@@ -1122,12 +1122,10 @@ class EDRanker:
             end_time = time.time()
             if self.rt_flag:
                 self.run_time.append([total_candidates, end_time-start_time])
-            print('order_learning', order_learning)
             if order_learning:
                 pred_entities = list()
 
                 decision_order, _ = self.model.get_order_truth()
-                print('batch', batch)
                 for mi, m in enumerate(batch):
                     pi = pred_ids[decision_order.index(mi)]
                     if m['selected_cands']['mask'][pi] == 1:
@@ -1141,7 +1139,7 @@ class EDRanker:
                 pred_entities = [m['selected_cands']['named_cands'][i] if m['selected_cands']['mask'][i] == 1
                                  else (m['selected_cands']['named_cands'][0] if m['selected_cands']['mask'][0] == 1 else 'NIL')
                                  for (i, m) in zip(pred_ids, batch)]
-
+                print('pred_entities', pred_entities)
             doc_names = [m['doc_name'] for m in batch]
             self.added_words = []
             self.added_ents = []
