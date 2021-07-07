@@ -1168,7 +1168,7 @@ class EDRanker:
                 for dname, entity in zip(doc_names, pred_scores):
                     predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        # if '1094testa 1094testa' in predictions_score:
-        #     print('predictions_score', predictions_score['1094testa 1094testa'])
+        if '1094testa 1094testa' in predictions_score:
+            print('predictions_score', predictions_score['1094testa 1094testa'])
         return predictions, predictions_score
 
