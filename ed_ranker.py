@@ -1158,7 +1158,7 @@ class EDRanker:
                 #self.added_words.append([self.word_vocab.id2word[idx] for idx in self.model.added_words[-1]])
                 #self.added_ents.append([self.ent_vocab.id2word[idx] for idx in self.model.added_ents[-1]])
                 predictions[doc_names[-1]].append({'pred': (pred_entities[-1], 0.)})
-                predictions_score[doc_names[-1]].append({'pred': (pred_scores[-1], 0.)})
+                predictions_score[doc_names[-1]].append({'pred': pred_scores[-1]})
             else:
                 # for ids in self.model.added_words:
                 #     self.added_words.append([self.word_vocab.id2word[idx] for idx in ids])
