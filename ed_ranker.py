@@ -1139,25 +1139,25 @@ class EDRanker:
                 pred_entities = [m['selected_cands']['named_cands'][i] if m['selected_cands']['mask'][i] == 1
                                  else (m['selected_cands']['named_cands'][0] if m['selected_cands']['mask'][0] == 1 else 'NIL')
                                  for (i, m) in zip(pred_ids, batch)]
-                pred_score = [{m['selected_cands']['named_cands'][i]: score[i] if m['selected_cands']['mask'][i] == 1
+                pred_scores = [{m['selected_cands']['named_cands'][i]: score[i] if m['selected_cands']['mask'][i] == 1
                                  else -1
                                  for i in range(len(score))}
                                  for (score, m) in zip(scores, batch)]
             doc_names = [m['doc_name'] for m in batch]
-            print('batch', batch)
-            print('pred_ids', pred_ids)
-            print('pred_entities', pred_entities)
-            pred_entities1 = [max(a_dictionary, key=a_dictionary.get) for a_dictionary in pred_score]
-            print('pred_entities1', pred_entities1)
+            # print('batch', batch)
+            # print('pred_ids', pred_ids)
+            # print('pred_entities', pred_entities)
+            # pred_entities1 = [max(a_dictionary, key=a_dictionary.get) for a_dictionary in pred_score]
+            # print('pred_entities1', pred_entities1)
             
-            print('pred_score', pred_score)
+            # print('pred_score', pred_score)
             self.added_words = []
             self.added_ents = []
             if self.seq_len>0 and self.one_entity_once:
                 #self.added_words.append([self.word_vocab.id2word[idx] for idx in self.model.added_words[-1]])
                 #self.added_ents.append([self.ent_vocab.id2word[idx] for idx in self.model.added_ents[-1]])
                 predictions[doc_names[-1]].append({'pred': (pred_entities[-1], 0.)})
-                predictions_score[doc_names[-1]].append({'pred': (pred_entities, 0.)})
+                predictions_score[doc_names[-1]].append({'pred': (pred_scores[-1], 0.)})
             else:
                 # for ids in self.model.added_words:
                 #     self.added_words.append([self.word_vocab.id2word[idx] for idx in ids])
@@ -1165,9 +1165,10 @@ class EDRanker:
                 #     self.added_ents.append([self.ent_vocab.id2word[idx] for idx in ids])
                 for dname, entity in zip(doc_names, pred_entities):
                     predictions[dname].append({'pred': (entity, 0.)})
+                for dname, entity in zip(doc_names, pred_scores):
                     predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        if '1094testa 1094testa' in predictions_score:
-            print('predictions_score', predictions_score['1094testa 1094testa'])
+        # if '1094testa 1094testa' in predictions_score:
+        #     print('predictions_score', predictions_score['1094testa 1094testa'])
         return predictions, predictions_score
 
