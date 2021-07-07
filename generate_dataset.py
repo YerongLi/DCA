@@ -51,8 +51,8 @@ def generate_csv(dataset):
 				print(doc)
 				print(entry["context"])
 				print(mention)
-				data.append([1,
-				1,
+				data.append([f'{doc}==={entry["context"][0]}',
+				f'{mention};{cname}',
 				1,
 				1,
 				1,
