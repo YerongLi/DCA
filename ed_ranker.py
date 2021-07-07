@@ -965,7 +965,7 @@ class EDRanker:
                         self.rt_flag = True
                     else:
                         self.rt_flag = False
-                    predictions = self.predict(data, config['isDynamic'], order_learning)
+                    predictions, _ = self.predict(data, config['isDynamic'], order_learning)
                     #self.records[e][dname] = self.record
 
                     print('dname', predictions)
@@ -1071,6 +1071,8 @@ class EDRanker:
 
     def predict(self, data, dynamic_option, order_learning):
         predictions = {items[0]['doc_name']: [] for items in data}
+        predictions_score = {items[0]['doc_name']: [] for items in data}
+        
         self.model.eval()
         #self.record = []
         for batch in data:  # each document is a minibatch
@@ -1115,7 +1117,7 @@ class EDRanker:
                                                  isOrderFixed=True, isSort=self.args.sort)
 
             scores = scores.cpu().data.numpy()
-
+            print('scores', scores)
             pred_ids = np.argmax(scores, axis=1)
             end_time = time.time()
             if self.rt_flag:
@@ -1146,6 +1148,7 @@ class EDRanker:
                 #self.added_words.append([self.word_vocab.id2word[idx] for idx in self.model.added_words[-1]])
                 #self.added_ents.append([self.ent_vocab.id2word[idx] for idx in self.model.added_ents[-1]])
                 predictions[doc_names[-1]].append({'pred': (pred_entities[-1], 0.)})
+                predictions_score[doc_names[-1]].append({'pred': (pred_entities, 0.)})
             else:
                 # for ids in self.model.added_words:
                 #     self.added_words.append([self.word_vocab.id2word[idx] for idx in ids])
@@ -1153,6 +1156,8 @@ class EDRanker:
                 #     self.added_ents.append([self.ent_vocab.id2word[idx] for idx in ids])
                 for dname, entity in zip(doc_names, pred_entities):
                     predictions[dname].append({'pred': (entity, 0.)})
+                    predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        return predictions
+        print('predictions_score', predictions_score)
+        return predictions, predictions_score
 
