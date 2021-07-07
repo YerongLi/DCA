@@ -1139,9 +1139,9 @@ class EDRanker:
                 pred_entities = [m['selected_cands']['named_cands'][i] if m['selected_cands']['mask'][i] == 1
                                  else (m['selected_cands']['named_cands'][0] if m['selected_cands']['mask'][0] == 1 else 'NIL')
                                  for (i, m) in zip(pred_ids, batch)]
-                # print('pred_entities', pred_entities)
             doc_names = [m['doc_name'] for m in batch]
             print('batch', batch)
+            print('pred_entities', pred_entities)
             self.added_words = []
             self.added_ents = []
             if self.seq_len>0 and self.one_entity_once:
