@@ -1,3 +1,4 @@
+from traceback import print_exc
 import numpy as np
 from DCA.vocabulary import Vocabulary
 import torch
@@ -1005,7 +1006,10 @@ class EDRanker:
                         with open(dname + '.json', 'w') as fp:
                             json.dump(predictions_score, fp)
                     except:
+                        import traceback
+                        traceback.print_exc()
                         print(predictions_score)
+                        sys.exit()
 
                 if not config['isDynamic']:
                     self.record_runtime('DCA')
