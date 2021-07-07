@@ -965,12 +965,11 @@ class EDRanker:
                         self.rt_flag = True
                     else:
                         self.rt_flag = False
-                    predictions, _ = self.predict(data, config['isDynamic'], order_learning)
+                    predictions, predictions_score = self.predict(data, config['isDynamic'], order_learning)
                     #self.records[e][dname] = self.record
 
                     # print('dname', predictions)
-                    with open(dname + '.json', 'w') as fp:
-                        json.dump(predictions, fp)
+
 
                     f1 = D.eval(org_dev_datasets[di][1], predictions)
 
@@ -1002,6 +1001,8 @@ class EDRanker:
                 if ave_f1 > best_ave_f1:
                     best_ave_f1 = ave_f1
                     best_ave_rlts = copy.deepcopy(temp_rlt)
+                    with open(dname + '.json', 'w') as fp:
+                        json.dump(predictions_score, fp)
 
                 if not config['isDynamic']:
                     self.record_runtime('DCA')
@@ -1168,7 +1169,7 @@ class EDRanker:
                 for dname, entity in zip(doc_names, pred_scores):
                     predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        if '1094testa 1094testa' in predictions_score:
-            print('predictions_score', predictions_score['1094testa 1094testa'])
+        # if '1094testa 1094testa' in predictions_score:
+        #     print('predictions_score', predictions_score['1094testa 1094testa'])
         return predictions, predictions_score
 
