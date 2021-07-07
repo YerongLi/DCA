@@ -242,7 +242,7 @@ def eval(testset, system_pred):
     for doc_name, content in testset.items():
         gold += [c['gold'][0] for c in content]
         pred += [c['pred'][0] for c in system_pred[doc_name]]
-
+    print(doc_name, gold)
     true_pos = 0
     for g, p in zip(gold, pred):
         if g == p and p != 'NIL':

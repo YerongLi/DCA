@@ -11,6 +11,7 @@ import multiprocessing
 import pandas as pd
 import json
 import os
+import pickle
 datadir = '../data/generated/test_train_data'
 conll_path = '../data/basic_data/test_datasets'
 person_path = '../data/basic_data/p_e_m_data/persons.txt'
