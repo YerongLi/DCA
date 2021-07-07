@@ -57,7 +57,10 @@ def generate_csv(dataset):
 				1,
 				1,
 				1,
-				]
+				1,
+				1,
+				1,
+				])
 				# data.append([f'{doc}==={entry["context"][0]}', 
 				# 	f'{mention};{cname}',
 				# 	str(featurev),
