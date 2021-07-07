@@ -1122,6 +1122,7 @@ class EDRanker:
             end_time = time.time()
             if self.rt_flag:
                 self.run_time.append([total_candidates, end_time-start_time])
+            print(order_learning)
             if order_learning:
                 pred_entities = list()
 
