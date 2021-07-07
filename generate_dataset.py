@@ -37,6 +37,7 @@ def generate_csv(dataset):
 	(name , dictionary) = dataset
 	data = []
 	def process(doc):
+		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
 			(groundtruth, _, _) = entry['gold']
 			if groundtruth in tjson and not tjson[groundtruth] == 0: continue 
@@ -48,33 +49,26 @@ def generate_csv(dataset):
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
-				print(doc)
-				print(entry["context"])
-				print(mention)
-				data.append([1,
-				f'{mention};{cname}',
-				1,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1,
-				])
-				# data.append([f'{doc}==={entry["context"][0]}', 
-				# 	f'{mention};{cname}',
-				# 	str(featurev),
-				# 	1 if c == groundtruth else 0,
-				# 	mention,
-				# 	f'{doc+"==="+" ".join(entry["context"])}--{mention}',
-				# 	1,
-				# 	0,
-				# 	])
+				# print(doc)
+				# print(pre_doc)
+				# print(entry["context"])
+				# print(mention)
+				# sys.exit()
+				data.append([f'{pre_doc}==={entry["context"][0]}',
+					f'{mention}==={cname}',
+					str(featurev),
+					1 if c == groundtruth else 0,
+					mention,
+					f'{pre_doc+"==="+" ".join(entry["context"])}--{mention}',
+					1,
+					0,
+					entry["context"][1],
+					])
 				
-	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
-	# 	process(doc)
-	# df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink'])
-	# df.to_csv(f'full_{name}.csv', index = False)
+	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
+		process(doc)
+	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right'])
+	df.to_csv(f'full_{name}.csv', index = False)
 	
 
 with multiprocessing.Pool(3) as pool: 
