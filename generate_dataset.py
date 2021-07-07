@@ -54,20 +54,21 @@ def generate_csv(dataset):
 				# print(entry["context"])
 				# print(mention)
 				# sys.exit()
-				data.append([f'{pre_doc}==={entry["context"][0]}',
+				data.append([f'{entry["context"][0]}',
 					f'{mention}==={cname}',
 					str(featurev),
 					1 if c == groundtruth else 0,
 					mention,
-					f'{pre_doc+"==="+" ".join(entry["context"])}--{mention}',
+					f'{entry["context"][0]}--{mention}',
 					1,
 					0,
 					entry["context"][1],
+					pre_doc,
 					])
 				
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
-	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right'])
+	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right', 'Doc'])
 	df.to_csv(f'full_{name}.csv', index = False)
 	
 
