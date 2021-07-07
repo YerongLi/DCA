@@ -1158,6 +1158,6 @@ class EDRanker:
                     predictions[dname].append({'pred': (entity, 0.)})
                     predictions_score[dname].append({'pred': (entity, 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        print('predictions_score', predictions_score,keys())
+        print('predictions_score', predictions_score.keys())
         return predictions, predictions_score
 
