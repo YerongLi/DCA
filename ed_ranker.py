@@ -1141,6 +1141,7 @@ class EDRanker:
                                  for (i, m) in zip(pred_ids, batch)]
             doc_names = [m['doc_name'] for m in batch]
             print('batch', batch)
+            print('pred_ids', pred_ids)
             print('pred_entities', pred_entities)
             self.added_words = []
             self.added_ents = []
