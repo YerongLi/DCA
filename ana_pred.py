@@ -7,5 +7,5 @@ def flatten(listOfLists):
 scores = [[list(pred['pred'].values()) for pred in predicions_score[doc_]] for doc_ in predicions_score]
 scores = list(flatten(scores))
 scores = list(flatten(scores))
-scores = [float(s) if s != '-100' for s in scores]
+scores = [float(s) for s in scores if s != '-100']
 print(scores)
