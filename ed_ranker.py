@@ -1158,7 +1158,7 @@ class EDRanker:
                 #self.added_words.append([self.word_vocab.id2word[idx] for idx in self.model.added_words[-1]])
                 #self.added_ents.append([self.ent_vocab.id2word[idx] for idx in self.model.added_ents[-1]])
                 predictions[doc_names[-1]].append({'pred': (pred_entities[-1], 0.)})
-                predictions_score[doc_names[-1]].append({'pred': pred_scores[-1]})
+                predictions_score[doc_names[-1]].append({'pred': (pred_scores[-1], 0.)})
             else:
                 # for ids in self.model.added_words:
                 #     self.added_words.append([self.word_vocab.id2word[idx] for idx in ids])
@@ -1167,9 +1167,9 @@ class EDRanker:
                 for dname, entity in zip(doc_names, pred_entities):
                     predictions[dname].append({'pred': (entity, 0.)})
                 for dname, entity in zip(doc_names, pred_scores):
-                    predictions_score[dname.split[(' ')[0]].append({'mention': entity[0], 'pred': (entity[1], 0.)})
+                    predictions_score[dname.split(' ')[0]].append({'mention': entity[0], 'pred': (entity[1], 0.)})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        if '1094testa' in predictions_score:
-            print('predictions_score', predictions_score['1094testa'])
+        if '1094testa 1094testa' in predictions_score:
+            print('predictions_score', predictions_score['1094testa 1094testa'])
         return predictions, predictions_score
 
