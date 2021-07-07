@@ -1073,7 +1073,7 @@ class EDRanker:
     def predict(self, data, dynamic_option, order_learning):
         predictions = {items[0]['doc_name']: [] for items in data}
         predictions_score = {items[0]['doc_name'].split(' ')[0]: [] for items in data}
-        
+        print(predictions_score.keys())
         self.model.eval()
         #self.record = []
         for batch in data:  # each document is a minibatch
