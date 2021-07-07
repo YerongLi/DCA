@@ -1,1 +1,1 @@
-git pull;time python main.py --mode train --order offset --model_path model --method SL | tee log
+git pull;time python -u main.py --mode train --order offset --model_path model --method SL | tee log
