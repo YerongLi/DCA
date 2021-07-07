@@ -51,16 +51,22 @@ def generate_csv(dataset):
 				print(doc)
 				print(entry["context"])
 				print(mention)
-				sys.exit()
-				data.append([f'{doc}==={entry["context"][0]}',
-					f'{mention};{cname}',
-					str(featurev),
-					1 if c == groundtruth else 0,
-					mention,
-					f'{doc+"==="+" ".join(entry["context"])}--{mention}',
-					1,
-					0,
-					])
+				data.append([1,
+				1,
+				1,
+				1,
+				1,
+				1,
+				]
+				# data.append([f'{doc}==={entry["context"][0]}', 
+				# 	f'{mention};{cname}',
+				# 	str(featurev),
+				# 	1 if c == groundtruth else 0,
+				# 	mention,
+				# 	f'{doc+"==="+" ".join(entry["context"])}--{mention}',
+				# 	1,
+				# 	0,
+				# 	])
 				
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
