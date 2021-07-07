@@ -2,6 +2,7 @@ from traceback import print_exc
 import numpy as np
 from DCA.vocabulary import Vocabulary
 import torch
+import sys
 from torch.autograd import Variable
 import DCA.dataset as D
 import DCA.utils as utils
@@ -989,27 +990,30 @@ class EDRanker:
                         #eval_f1_csv_writer.writerow([dname, e, 2, f1_2])
                     temp_rlt.append([dname, f1])
                     if dname == 'aida-A':
+                        dev_predictions_score = copy.deepcopy(predictions_score)
                         dev_f1 = f1
                     if dname == 'aida-B':
+                        test_predictions_score = copy.deepcopy(predictions_score)
                         test_f1 = f1
+                    if dname == 'aida-train':
+                        train_predictions_score = copy.deepcopy(predictions_score)
                     ave_f1 += f1
                 if dev_f1>best_aida_A_f1:
                     best_aida_A_f1 = dev_f1
                     best_aida_A_rlts = copy.deepcopy(temp_rlt)
+                    with open('aida-A.json', 'w') as fp:
+                        json.dump(dev_predictions_score, fp)
+                    with open('aida-B.json', 'w') as fp:
+                        json.dump(test_predictions_score, fp)
+                    with open('aida-train.json', 'w') as fp:
+                        json.dump(train_predictions_score, fp)
                 if test_f1>best_aida_B_f1:
                     best_aida_B_f1 = test_f1
                     best_aida_B_rlts = copy.deepcopy(temp_rlt)
                 if ave_f1 > best_ave_f1:
                     best_ave_f1 = ave_f1
                     best_ave_rlts = copy.deepcopy(temp_rlt)
-                    try:
-                        with open(dname + '.json', 'w') as fp:
-                            json.dump(predictions_score, fp)
-                    except:
-                        import traceback
-                        traceback.print_exc()
-                        print(predictions_score)
-                        sys.exit()
+
 
                 if not config['isDynamic']:
                     self.record_runtime('DCA')
@@ -1176,7 +1180,7 @@ class EDRanker:
                 for dname, entity in zip(doc_names, pred_scores):
                     predictions_score[dname.split(' ')[0]].append({'mention': entity[0], 'pred': entity[1]})
             #self.record.append(dict({'added_words':self.added_words, 'added_ents':self.added_ents}))
-        if '1094testa' in predictions_score:
-            print('predictions_score', predictions_score['1094testa'])
+        # if '1094testa' in predictions_score:
+        #     print('predictions_score', predictions_score['1094testa'])
         return predictions, predictions_score
 
