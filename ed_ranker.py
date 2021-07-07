@@ -1001,8 +1001,11 @@ class EDRanker:
                 if ave_f1 > best_ave_f1:
                     best_ave_f1 = ave_f1
                     best_ave_rlts = copy.deepcopy(temp_rlt)
-                    with open(dname + '.json', 'w') as fp:
-                        json.dump(predictions_score, fp)
+                    try:
+                        with open(dname + '.json', 'w') as fp:
+                            json.dump(predictions_score, fp)
+                    except:
+                        print(predictions_score)
 
                 if not config['isDynamic']:
                     self.record_runtime('DCA')
