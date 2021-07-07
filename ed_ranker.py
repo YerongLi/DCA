@@ -1147,6 +1147,9 @@ class EDRanker:
             print('batch', batch)
             print('pred_ids', pred_ids)
             print('pred_entities', pred_entities)
+            pred_entities1 = [max(a_dictionary, key=a_dictionary.get) for a_dictionary in pred_score]
+            print('pred_entities1', pred_entities1)
+            
             print('pred_score', pred_score)
             self.added_words = []
             self.added_ents = []
