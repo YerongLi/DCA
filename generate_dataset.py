@@ -48,6 +48,8 @@ def generate_csv(dataset):
 				# print(candidate)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
+				if mention == 'Swansea':
+					print(c, c == groundtruth)
 				if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
 				featurev = [0.0] * 27
@@ -58,6 +60,7 @@ def generate_csv(dataset):
 				# print(mention)
 				# sys.exit()
 				if c == groundtruth: has_groundTruth = True
+
 				data.append([f'{entry["context"][0]}',
 					f'{mention}==={cname}',
 					str(featurev),
