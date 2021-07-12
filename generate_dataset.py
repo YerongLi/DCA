@@ -48,7 +48,7 @@ def generate_csv(dataset):
 				# print(candidate)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
-				if 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
+				if c!= groundtruth and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
