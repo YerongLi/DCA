@@ -45,7 +45,7 @@ def generate_csv(dataset):
 			mention = entry['mention']
 			has_groundTruth = False
 			for candidate in entry['candidates']:
-				print(candidate)
+				# print(candidate)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
 				if 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
@@ -70,6 +70,7 @@ def generate_csv(dataset):
 					pre_doc,
 					])
 				if not has_groundTruth:
+					print(doc, mention)
 					print('gold', entry['gold'])
 					data.append([f'{entry["context"][0]}',
 					f'{mention}==={groundtruth.replace("_", " ")}',
