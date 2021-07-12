@@ -84,9 +84,10 @@ def read_csv_file(path):
 
             gold = comps[-1].split(',')
             if gold[0] == '-1':
-                print(gold)
+                # print(gold)
                 gold = (','.join(gold[2:]).replace('"', '%22').replace(' ', '_'), 1e-5, -1)
             else:
+                print(gold)
                 gold = (','.join(gold[3:]).replace('"', '%22').replace(' ', '_'), 1e-5, -1)
 
             if doc_name not in data:
