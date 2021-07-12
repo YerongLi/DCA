@@ -70,8 +70,9 @@ def generate_csv(dataset):
 					pre_doc,
 					])
 				if not has_groundTruth:
-					print(doc, mention)
-					print('gold', entry['gold'])
+					if mention == 'Swansea':
+						print(doc, mention)
+						print('gold', entry['gold'])
 					data.append([f'{entry["context"][0]}',
 					f'{mention}==={groundtruth.replace("_", " ")}',
 					str(featurev),
