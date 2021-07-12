@@ -16,6 +16,8 @@ def check(filename):
 		pbar.update(1)
 		if ground_truth.shape[0] != 1:
 			print(ground_truth.shape[0])
+		l = r + 1
+		r = l
 	pbar.close()
 with multiprocessing.Pool(3) as p:
 	p.map(check, datasets)
