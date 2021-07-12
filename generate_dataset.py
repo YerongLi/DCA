@@ -72,24 +72,24 @@ def generate_csv(dataset):
 					entry["context"][1],
 					pre_doc,
 					])
-				if not has_groundTruth:
-					featurev = [0.0] * 27
-					# print(gtprior)
-					featurev[16] = gtprior
-					# if mention == 'Swansea':
-					# 	print(doc, mention)
-					# 	print('gold', entry['gold'])
-					data.append([f'{entry["context"][0]}',
-					f'{mention}==={groundtruth.replace("_", " ")}',
-					str(featurev),
-					1,
-					mention,
-					f'{entry["context"][0]}--{mention}',
-					1,
-					0,
-					entry["context"][1],
-					pre_doc,
-					])
+			if not has_groundTruth:
+				featurev = [0.0] * 27
+				# print(gtprior)
+				featurev[16] = gtprior
+				# if mention == 'Swansea':
+				# 	print(doc, mention)
+				# 	print('gold', entry['gold'])
+				data.append([f'{entry["context"][0]}',
+				f'{mention}==={groundtruth.replace("_", " ")}',
+				str(featurev),
+				1,
+				mention,
+				f'{entry["context"][0]}--{mention}',
+				1,
+				0,
+				entry["context"][1],
+				pre_doc,
+				])
 
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
