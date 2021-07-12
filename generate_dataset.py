@@ -12,6 +12,15 @@ import pandas as pd
 import json
 import os
 import pickle
+import pymongo
+
+
+manager = multiprocessing.Manager()
+doclist = manager.list()
+client = pymongo.MongoClient(host='localhost', port=27017)
+db = client.dbpedia
+
+document = db.document
 datadir = '../data/generated/test_train_data'
 conll_path = '../data/basic_data/test_datasets'
 person_path = '../data/basic_data/p_e_m_data/persons.txt'
@@ -34,15 +43,18 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 tjson = json.load(open('entityType.json', 'r'))
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
+	global doclist
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
 	data = []
 	def process(doc):
+		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
 			(groundtruth, gtprior, _) = entry['gold']
-			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue 
+			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
+			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
 			for candidate in entry['candidates']:
 				# print(candidate)
@@ -90,15 +102,17 @@ def generate_csv(dataset):
 				entry["context"][1],
 				pre_doc,
 				])
-
+		doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
 	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right', 'Doc'])
 	df.to_csv(f'full_{name}.csv', index = False)
 	
+	
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
+document.insdeinsert_many(list(doclist))
 # with open('../data/generated/test_train_data/aida_train.csv') as f:
 # 	dicmention = dict()
 # 	count  = 0
