@@ -40,7 +40,7 @@ def generate_csv(dataset):
 	def process(doc):
 		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
-			(groundtruth, _, _) = entry['gold']
+			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue 
 			mention = entry['mention']
 			has_groundTruth = False
@@ -73,6 +73,9 @@ def generate_csv(dataset):
 					pre_doc,
 					])
 				if not has_groundTruth:
+					featurev = [0.0] * 27
+					print(gtprior)
+					featurev[16] = gtprior
 					# if mention == 'Swansea':
 					# 	print(doc, mention)
 					# 	print('gold', entry['gold'])
