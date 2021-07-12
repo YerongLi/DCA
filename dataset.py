@@ -4,13 +4,13 @@ from collections import OrderedDict
 from pprint import pprint
 import pickle as pkl
 import json
-import pymongo
+# import pymongo
 
 
-client = pymongo.MongoClient(host='localhost', port=27017)
-db = client.dbpedia
+# client = pymongo.MongoClient(host='localhost', port=27017)
+# db = client.dbpedia
 
-document = db.document
+# document = db.document
 
 doc2type = pkl.load(open('../data/doc2type.pkl', 'rb'))
 entity2type = pkl.load(open('../data/entity2type.pkl', 'rb'))
@@ -249,9 +249,9 @@ def eval(testset, system_pred):
     for doc_name, content in testset.items():
         gold += [c['gold'][0] for c in content]
         pred += [c['pred'][0] for c in system_pred[doc_name]]
-        print(doc_name, gold)
-        document.insert_one({'_id': doc_name.split(' ')[0], 'gold': [c['gold'][0] for c in content]})
-    print('        insert finished   ')
+    #     print(doc_name, gold)
+    #     document.insert_one({'_id': doc_name.split(' ')[0], 'gold': [c['gold'][0] for c in content]})
+    # print('        insert finished   ')
     true_pos = 0
     for g, p in zip(gold, pred):
         if g == p and p != 'NIL':
