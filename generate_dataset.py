@@ -49,7 +49,7 @@ def generate_csv(dataset):
 				c = candidate[0]
 				cname = c.replace('_', ' ')
 				if mention == 'Swansea':
-					print(c, c == groundtruth)
+					print(c, c == groundtruth, groundtruth)
 				if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
 				featurev = [0.0] * 27
