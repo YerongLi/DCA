@@ -74,7 +74,7 @@ def generate_csv(dataset):
 					])
 				if not has_groundTruth:
 					featurev = [0.0] * 27
-					print(gtprior)
+					# print(gtprior)
 					featurev[16] = gtprior
 					# if mention == 'Swansea':
 					# 	print(doc, mention)
