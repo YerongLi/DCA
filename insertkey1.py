@@ -14,7 +14,7 @@ for entry in document.find():
 		# title = entry['title'] if 'title' in entry else ''
 		doc = nlp(entry['text'])
 		for phrase in doc._.phrases:
-		print(phrase.text)
-		print(phrase.rank, phrase.count)
-		print(phrase.chunks)
+			print(phrase.text)
+			print(phrase.rank, phrase.count)
+			print(phrase.chunks)
 		# document.update_one({'_id': entry['_id']}, {'$set' : {'key1' : entry['text']}})
