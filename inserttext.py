@@ -7,4 +7,5 @@ document = db.document
 js = json.load(open('d.json','r'))
 for entry in js:
 	if document.find_one({'_id': entry['_id']}):
-		document.update_one({'_id': entry['_id']}, {'$set' : {'text' : entry['text']}})
+		title = entry['title'] if 'title' in entry else ''
+		document.update_one({'_id': entry['_id']}, {'$set' : {'text' : entry['text'], 'title' : title}})
