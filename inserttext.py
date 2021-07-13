@@ -4,4 +4,4 @@ client = pymongo.MongoClient(host='localhost', port=27017)
 db = client.dbpedia
 
 document = db.document
-json.load(open('d.json','r'))
+json.loads(open('d.json','r'))
