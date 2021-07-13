@@ -11,8 +11,9 @@ nlp.add_pipe("textrank")
 document = db.document
 
 for entry in document.find():
-		# title = entry['title'] if 'title' in entry else ''
+		# title = entry['title'] if 'title' in entry else None
 		doc = nlp(entry['text'])
 		keywords = [phrase.text for phrase in doc._.phrases]
+		if 'title' in entry : keyword = entry['title'] + keywords
 		# print(keywords)
 		document.update_one({'_id': entry['_id']}, {'$set' : {'key1' : keywords}})
