@@ -6,5 +6,5 @@ db = client.dbpedia
 document = db.document
 js = json.load(open('d.json','r'))
 for entry in js:
-	if document.find_one({'-id', entry['_id']}):
-		document.update_one({'-id', entry['_id']}, {'$set' : {'text' : entry['text']}})
+	if document.find_one({'_id', entry['_id']}):
+		document.update_one({'_id', entry['_id']}, {'$set' : {'text' : entry['text']}})
