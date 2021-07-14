@@ -51,7 +51,7 @@ def generate_csv(dataset):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
-			print('total')
+			# print('total')
 			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
@@ -64,18 +64,21 @@ def generate_csv(dataset):
 			for candidate in entry['candidates']:
 				c = candidate[0]
 				cname = c.replace('_', ' ')
-				if c == groundtruth:
-					gttype = candidate[2].index(1)
-					if gttype != mtype:
-						print('mismatch ',gttype, mtype)
-						print(mention, groundtruth)
-				# print(candidate)
-				# if groundtruth == 'Swansea_City_A.F.C.':
-					# print(c, c == groundtruth, groundtruth)
+				gttype = candidate[2].index(1)
+				typematch = 1 if c == groundtruth or gttype == mtype else 0
+				# if c == groundtruth:
+				# 	gttype = candidate[2].index(1)
+				# 	# if gttype != mtype:
+				# 	# 	print('mismatch ',gttype, mtype)
+				# 	# 	print(mention, groundtruth)
+				# # print(candidate)
+				# # if groundtruth == 'Swansea_City_A.F.C.':
+				# 	# print(c, c == groundtruth, groundtruth)
 				if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
 					continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
+				featurev[9] = typematch
 				# print(doc)
 				# print(pre_doc)
 				# print(entry["context"])
