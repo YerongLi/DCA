@@ -50,12 +50,15 @@ def generate_csv(dataset):
 	def process(doc):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
-		print(dictionary)
-		sys.exit()
 		for entry in dictionary[doc]:
-			(groundtruth, gtprior, _) = entry['gold']
+			(groundtruth, gtprior, gttype) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
+			mtype = entry['mtype'].index(1)
+			gttype = gttype.index(1)
+			if gttype != mtype:
+				print(gttype, mtype)
+				print(mention, groundtruth)
 			# print(entry.keys())
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
