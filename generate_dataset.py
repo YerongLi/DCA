@@ -112,7 +112,7 @@ def generate_csv(dataset):
 
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
-document.insert_many(list(doclist))
+# document.insert_many(list(doclist))
 # with open('../data/generated/test_train_data/aida_train.csv') as f:
 # 	dicmention = dict()
 # 	count  = 0
