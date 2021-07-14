@@ -100,6 +100,7 @@ def generate_csv(dataset):
 				featurev = [0.0] * 27
 				# print(gtprior)
 				featurev[16] = gtprior
+				featurev[9] = typematch
 				# if mention == 'Swansea':
 				# 	print(doc, mention)
 				# 	print('gold', entry['gold'])
