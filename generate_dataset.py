@@ -51,7 +51,6 @@ def generate_csv(dataset):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
-			# print('total')
 			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
