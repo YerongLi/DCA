@@ -51,18 +51,22 @@ def generate_csv(dataset):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for entry in dictionary[doc]:
-			(groundtruth, gtprior, gttype) = entry['gold']
+			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
 			mtype = entry['mtype'].index(1)
-			gttype = gttype.index(1)
-			if gttype != mtype:
-				print(gttype, mtype)
-				print(mention, groundtruth)
+			# gttype = gttype.index(1)
+
 			# print(entry.keys())
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
-			for candidate in entry['candidates'][:5]:
+			for candidate in entry['candidates']:
+				if c == groundtruth:
+					gttype = candidate[2].index(1)
+					if gttype != mtype:
+						print(gttype, mtype)
+						print(mention, groundtruth)
+
 				# print(candidate)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
