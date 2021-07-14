@@ -66,7 +66,7 @@ def generate_csv(dataset):
 				if c == groundtruth:
 					gttype = candidate[2].index(1)
 					if gttype != mtype:
-						print(gttype, mtype)
+						print('mismatch ',gttype, mtype)
 						print(mention, groundtruth)
 				# print(candidate)
 				# if groundtruth == 'Swansea_City_A.F.C.':
