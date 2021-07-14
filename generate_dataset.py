@@ -61,15 +61,14 @@ def generate_csv(dataset):
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
 			for candidate in entry['candidates']:
+				c = candidate[0]
+				cname = c.replace('_', ' ')
 				if c == groundtruth:
 					gttype = candidate[2].index(1)
 					if gttype != mtype:
 						print(gttype, mtype)
 						print(mention, groundtruth)
-
 				# print(candidate)
-				c = candidate[0]
-				cname = c.replace('_', ' ')
 				# if groundtruth == 'Swansea_City_A.F.C.':
 					# print(c, c == groundtruth, groundtruth)
 				if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
