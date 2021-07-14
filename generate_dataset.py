@@ -60,7 +60,7 @@ def generate_csv(dataset):
 			# print(entry.keys())
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
-			for candidate in entry['candidates']:
+			for candidate in entry['candidates'][:10]:
 				c = candidate[0]
 				cname = c.replace('_', ' ')
 				gttype = candidate[2].index(1)
