@@ -56,7 +56,7 @@ def generate_csv(dataset):
 			mention = entry['mention']
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
-			for candidate in entry['candidates']:
+			for candidate in entry['candidates'][:5]:
 				# print(candidate)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
