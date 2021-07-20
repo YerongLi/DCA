@@ -90,7 +90,7 @@ def generate_csv(dataset):
 					str(featurev),
 					1 if c == groundtruth else 0,
 					mention,
-					f'{entry["context"][0]}--{mention}',
+					f'{pre_doc} {entry["context"][0]} {entry["context"][1]}--{mention}',
 					1,
 					0,
 					entry["context"][1],
@@ -109,7 +109,7 @@ def generate_csv(dataset):
 				str(featurev),
 				1,
 				mention,
-				f'{entry["context"][0]}--{mention}',
+				f'{pre_doc} {entry["context"][0]} {entry["context"][1]}--{mention}',
 				1,
 				0,
 				entry["context"][1],
@@ -118,7 +118,7 @@ def generate_csv(dataset):
 		doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
-	df = pd.DataFrame(data, columns=['Question','Mention_label','Features','Label','Mention','QuestionMention','db','blink', 'right', 'Doc'])
+	df = pd.DataFrame(data, columns=['left','Mention_label','Features','Label','Mention','QuestionMention','db','blink','right','Question'])
 	df.to_csv(f'full_{name}.csv', index = False)
 	
 	
