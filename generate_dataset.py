@@ -50,7 +50,7 @@ def generate_csv(dataset):
 	def process(doc):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
-		for entry in dictionary[doc]:
+		for i, entry in enumerate(dictionary[doc]):
 			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
@@ -91,7 +91,7 @@ def generate_csv(dataset):
 					str(featurev),
 					1 if c == groundtruth else 0,
 					mention,
-					f'{pre_doc} {entry["context"][0]} {entry["context"][1]}--{mention}',
+					f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
 					1,
 					0,
 					entry["context"][1],
@@ -110,7 +110,7 @@ def generate_csv(dataset):
 				str(featurev),
 				1,
 				mention,
-				f'{pre_doc} {entry["context"][0]} {entry["context"][1]}--{mention}',
+				f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
 				1,
 				0,
 				entry["context"][1],
