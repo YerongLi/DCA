@@ -74,8 +74,8 @@ def generate_csv(dataset):
 				# # print(candidate)
 				# # if groundtruth == 'Swansea_City_A.F.C.':
 				# 	# print(c, c == groundtruth, groundtruth)
-				if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
-					continue
+				# if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
+				# 	continue
 				featurev = [0.0] * 27
 				featurev[16] = candidate[1]
 				featurev[9] = typematch
