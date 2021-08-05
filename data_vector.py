@@ -128,7 +128,7 @@ def generate_csv(dataset):
 	# df.to_csv(f'full_{name}.csv', index = False)
 	
 	
-
+print('Generating data vector')
 with multiprocessing.Pool(3) as pool: 
 	pool.map(generate_csv, enumerate(datasets))
 # document.insert_many(list(doclist))
