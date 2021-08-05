@@ -121,7 +121,8 @@ def generate_csv(dataset):
 			# 	entry["context"][1],
 			# 	pre_doc,
 			# 	])
-			data.append([statistics/sum(statistics), gttype])
+			s = sum(statistics)
+			data.append([[j /s for j in statistics], gttype])
 		print(data)
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
