@@ -122,8 +122,8 @@ def generate_csv(dataset):
 			data.append([statistics/sum(statistics), gttype])
 		print(data)
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
-	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
-	# 	process(doc)
+	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
+		process(doc)
 	# df = pd.DataFrame(data, columns=['left','Mention_label','Features','Label','Mention','QuestionMention','db','blink','right','Question'])
 	# df.to_csv(f'full_{name}.csv', index = False)
 	
