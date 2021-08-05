@@ -128,7 +128,6 @@ def generate_csv(dataset):
 			s = sum(statistics)
 			# print(s, statistics)
 
-			ax = fig.add_subplot(111, projection='3d')
 			datax.append(statistics[0]/s)
 			datay.append(statistics[1]/s)
 			dataz.append(statistics[2]/s)
@@ -139,6 +138,8 @@ def generate_csv(dataset):
 		import matplotlib.pyplot as plt
 
 		fig = plt.figure()
+		ax = fig.add_subplot(111, projection='3d')
+
 		img = ax.scatter(datax, datay, dataz, c=datac, cmap=plt.hot())
 		plt.savefig(f'{name}.png')
 		plt.clf()
