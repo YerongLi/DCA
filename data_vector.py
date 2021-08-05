@@ -51,6 +51,8 @@ def generate_csv(dataset):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for i, entry in enumerate(dictionary[doc]):
+			if i > 100:
+				break
 			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
