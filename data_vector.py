@@ -60,68 +60,72 @@ def generate_csv(dataset):
 			# print(entry.keys())
 			mentionlist.append([mention, groundtruth])
 			has_groundTruth = False
+			statistics = [0]*4
+			gttype = 3
 			for candidate in entry['candidates']:
 			# for candidate in entry['candidates'][:10]:
-				# print(candidates)
 				c = candidate[0]
 				cname = c.replace('_', ' ')
-				gttype = candidate[2].index(1)
-				typematch = 1 if c == groundtruth or gttype == mtype else 0
-				# if c == groundtruth:
-				# 	gttype = candidate[2].index(1)
-				# 	# if gttype != mtype:
-				# 	# 	print('mismatch ',gttype, mtype)
-				# 	# 	print(mention, groundtruth)
-				# # print(candidate)
-				# # if groundtruth == 'Swansea_City_A.F.C.':
-				# 	# print(c, c == groundtruth, groundtruth)
-				# if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
-				# 	continue
-				featurev = [0.0] * 27
-				featurev[16] = candidate[1]
-				featurev[9] = typematch
-				# print(doc)
-				# print(pre_doc)
-				# print(entry["context"])
-				# print(mention)
-				# sys.exit()
-				if c == groundtruth: has_groundTruth = True
+				ctype = candidate[2].index(1)
+				statistics[ctype] += 1
+				# typematch = 1 if c == groundtruth or ctype == mtype else 0
+				if c == groundtruth:
+					gttype = candidate[2].index(1)
+					# if gttype != mtype:
+					# 	print('mismatch ',gttype, mtype)
+					# 	print(mention, groundtruth)
+				# # # print(candidate)
+				# # # if groundtruth == 'Swansea_City_A.F.C.':
+				# # 	# print(c, c == groundtruth, groundtruth)
+				# # if (not c == groundtruth) and 'en.wikipedia.org/wiki/' + c not in entity_voca.word2id:
+				# # 	continue
+				# featurev = [0.0] * 27
+				# featurev[16] = candidate[1]
+				# featurev[9] = typematch
+				# # print(doc)
+				# # print(pre_doc)
+				# # print(entry["context"])
+				# # print(mention)
+				# # sys.exit()
+				# if c == groundtruth: has_groundTruth = True
 
-				data.append([f'{entry["context"][0]}',
-					f'{mention}==={cname}',
-					str(featurev),
-					1 if c == groundtruth else 0,
-					mention,
-					f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
-					1,
-					0,
-					entry["context"][1],
-					pre_doc,
-					])
-			if not has_groundTruth:
-				featurev = [0.0] * 27
-				# print(gtprior)
-				featurev[16] = gtprior
-				featurev[9] = typematch
-				# if mention == 'Swansea':
-				# 	print(doc, mention)
-				# 	print('gold', entry['gold'])
-				data.append([f'{entry["context"][0]}',
-				f'{mention}==={groundtruth.replace("_", " ")}',
-				str(featurev),
-				1,
-				mention,
-				f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
-				1,
-				0,
-				entry["context"][1],
-				pre_doc,
-				])
-		doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
-	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
-		process(doc)
-	df = pd.DataFrame(data, columns=['left','Mention_label','Features','Label','Mention','QuestionMention','db','blink','right','Question'])
-	df.to_csv(f'full_{name}.csv', index = False)
+				# data.append([f'{entry["context"][0]}',
+				# 	f'{mention}==={cname}',
+				# 	str(featurev),
+				# 	1 if c == groundtruth else 0,
+				# 	mention,
+				# 	f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
+				# 	1,
+				# 	0,
+				# 	entry["context"][1],
+				# 	pre_doc,
+				# 	])
+			# if not has_groundTruth:
+			# 	featurev = [0.0] * 27
+			# 	# print(gtprior)
+			# 	featurev[16] = gtprior
+			# 	featurev[9] = typematch
+			# 	# if mention == 'Swansea':
+			# 	# 	print(doc, mention)
+			# 	# 	print('gold', entry['gold'])
+			# 	data.append([f'{entry["context"][0]}',
+			# 	f'{mention}==={groundtruth.replace("_", " ")}',
+			# 	str(featurev),
+			# 	1,
+			# 	mention,
+			# 	f'{pre_doc} {i} {entry["context"][0]} {entry["context"][1]}--{mention}',
+			# 	1,
+			# 	0,
+			# 	entry["context"][1],
+			# 	pre_doc,
+			# 	])
+			data.append([statistics/sum(statistics), gttype])
+		print(data)
+		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
+	# for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
+	# 	process(doc)
+	# df = pd.DataFrame(data, columns=['left','Mention_label','Features','Label','Mention','QuestionMention','db','blink','right','Question'])
+	# df.to_csv(f'full_{name}.csv', index = False)
 	
 	
 
