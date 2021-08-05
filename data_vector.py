@@ -126,7 +126,6 @@ def generate_csv(dataset):
 			# 	pre_doc,
 			# 	])
 			s = sum(statistics)
-			data
 			# print(s, statistics)
 			from mpl_toolkits.mplot3d import Axes3D
 			import matplotlib.pyplot as plt
@@ -141,6 +140,7 @@ def generate_csv(dataset):
 		# print(data)
 		img = ax.scatter(datax, datay, dataz, c=datac, cmap=plt.hot())
 		plt.savefig(f'{name}.png')
+		plt.clf()
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
