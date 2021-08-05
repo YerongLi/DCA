@@ -54,8 +54,8 @@ def generate_csv(dataset):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
 		for i, entry in enumerate(dictionary[doc]):
-			if i > 100:
-				break
+			# if i > 100:
+			# 	break
 			(groundtruth, gtprior, _) = entry['gold']
 			# if groundtruth in tjson and not tjson[groundtruth] == 0: continue
 			mention = entry['mention']
@@ -127,10 +127,7 @@ def generate_csv(dataset):
 			# 	])
 			s = sum(statistics)
 			# print(s, statistics)
-			from mpl_toolkits.mplot3d import Axes3D
-			import matplotlib.pyplot as plt
 
-			fig = plt.figure()
 			ax = fig.add_subplot(111, projection='3d')
 			datax.append(statistics[0]/s)
 			datay.append(statistics[1]/s)
@@ -138,6 +135,10 @@ def generate_csv(dataset):
 			datak.append(statistics[3]/s)
 			datac.append(colors[gttype])
 		# print(data)
+		from mpl_toolkits.mplot3d import Axes3D
+		import matplotlib.pyplot as plt
+
+		fig = plt.figure()
 		img = ax.scatter(datax, datay, dataz, c=datac, cmap=plt.hot())
 		plt.savefig(f'{name}.png')
 		plt.clf()
