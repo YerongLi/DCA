@@ -13,6 +13,8 @@ import json
 import os
 import pickle
 import pymongo
+import numpy as np
+import matplotlib.cm as cm
 
 
 manager = multiprocessing.Manager()
@@ -40,13 +42,14 @@ conll = D.CoNLLDatasetOnly(datadir, conll_path, person_path, 'offset', 'SL')
 # print(conll.train['528 SQUASH) 528 SQUASH)'][0]['context'])
 # print(conll.train['528 SQUASH) 528 SQUASH)'][1]['context'])
 # conll.train['528 SQUASH) 528 SQUASH)'][0].keys()
+colors = cm.rainbow(np.linspace(0, 1, 4))
 tjson = json.load(open('entityType.json', 'r'))
 datasets = [('train', conll.train), ('testA', conll.testA), ('testB', conll.testB)]
 def generate_csv(dataset):
 	global doclist
 	(pos, dataset) = dataset
 	(name , dictionary) = dataset
-	data = []
+	datax, datay, dataz, datak, datac = [], [], [], [], []
 	def process(doc):
 		mentionlist = []
 		pre_doc = doc.split(' ')[0]
@@ -123,9 +126,21 @@ def generate_csv(dataset):
 			# 	pre_doc,
 			# 	])
 			s = sum(statistics)
+			data
 			# print(s, statistics)
-			data.append([[j /s for j in statistics], gttype])
-		print(data)
+			from mpl_toolkits.mplot3d import Axes3D
+			import matplotlib.pyplot as plt
+
+			fig = plt.figure()
+			ax = fig.add_subplot(111, projection='3d')
+			datax.append(statistics[0]/s)
+			datay.append(statistics[1]/s)
+			dataz.append(statistics[2]/s)
+			datak.append(statistics[3]/s)
+			datac.append(colors[gttype])
+		# print(data)
+		img = ax.scatter(datax, datay, dataz, c=datac, cmap=plt.hot())
+		plt.savefig(f'{name}.png')
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
 	for doc in tqdm.tqdm(list(dictionary.keys()), position = pos):
 		process(doc)
@@ -135,7 +150,7 @@ def generate_csv(dataset):
 	
 print('Generating data vector')
 with multiprocessing.Pool(3) as pool: 
-	pool.map(generate_csv, enumerate(datasets))
+	pool.map(generate_csv, enumerate(datasets[:1]))
 # document.insert_many(list(doclist))
 # with open('../data/generated/test_train_data/aida_train.csv') as f:
 # 	dicmention = dict()
