@@ -64,6 +64,7 @@ def generate_csv(dataset):
 			has_groundTruth = False
 			statistics = [0]*4
 			gttype = 3
+			if len(entry['candidates']) == 0: continue
 			for candidate in entry['candidates']:
 			# for candidate in entry['candidates'][:10]:
 				c = candidate[0]
@@ -122,7 +123,7 @@ def generate_csv(dataset):
 			# 	pre_doc,
 			# 	])
 			s = sum(statistics)
-			print(s, statistics)
+			# print(s, statistics)
 			data.append([[j /s for j in statistics], gttype])
 		print(data)
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
