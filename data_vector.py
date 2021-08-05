@@ -122,6 +122,7 @@ def generate_csv(dataset):
 			# 	pre_doc,
 			# 	])
 			s = sum(statistics)
+			print(s, statistics)
 			data.append([[j /s for j in statistics], gttype])
 		print(data)
 		# doclist.append({'_id': pre_doc, 'mention': mentionlist, 'set' : 'aida'})
