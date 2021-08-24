@@ -1001,11 +1001,11 @@ class EDRanker:
                 if dev_f1>best_aida_A_f1:
                     best_aida_A_f1 = dev_f1
                     best_aida_A_rlts = copy.deepcopy(temp_rlt)
-                    with open('aida-A.json', 'w') as fp:
+                    with open(f'aida-A{self.args.ctx_window}.json', 'w') as fp:
                         json.dump(dev_predictions_score, fp)
-                    with open('aida-B.json', 'w') as fp:
+                    with open(f'aida-B{self.args.ctx_window}.json', 'w') as fp:
                         json.dump(test_predictions_score, fp)
-                    with open('aida-train.json', 'w') as fp:
+                    with open(f'aida-train{self.args.ctx_window}.json', 'w') as fp:
                         json.dump(train_predictions_score, fp)
                 if test_f1>best_aida_B_f1:
                     best_aida_B_f1 = test_f1
